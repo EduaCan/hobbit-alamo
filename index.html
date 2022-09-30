@@ -7,6 +7,37 @@
     <title>Me quedo solo</title>
 </head>
 <body>
-    
+    <section class="container">
+<!-- SPLASH SCREEN -->
+        <div id="splash-screen" class="container">
+            <img src="./images/torreMagica5.png" alt="logo">
+            <button id="start-btn">Start</button>
+            <div id="context">
+                <p>Context Here</p>
+            </div>
+            <div id="instructions"><p>instructions Here</p></div>
+        </div>
+
+        <!-- GAME SCREEN -->
+        <div id="game-screen" class="container">
+            <canvas id="my-canvas" width="600" height="600"></canvas>
+            <p id="score-p">Score: <span>0</span></p>
+            <p id="tip-p">Random tip or advise</p>
+
+        </div>
+
+    <!-- GAME OVER SCREEN -->
+    <div id="gameover-screen" class="container">
+        <img src="./images/game_over_small.png" alt="game over logo">
+        <div id="score-div">
+            <p>Name</p>
+            <p>Score: <span>500</span></p>
+        </div>
+        <button id="replay-btn">Replay</button>
+        <button id="home-btn">Home</button>
+      </div>
+
+    </section>
+    <script></script>
 </body>
 </html>
