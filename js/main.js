@@ -45,7 +45,14 @@ const restartGame = () => {
     //si hace falta, setTimeOut() o setInterval
 }
 
-
+disparar = (event) => {
+    if (event.button === 0) {
+        //console.log("click del mouse", gameObj);
+        gameObj.disparar()
+      }
+      console.log(event.clientX, event.clientY)
+   
+}
 
 
 // ADD EVENT LISTENERS
@@ -58,5 +65,8 @@ startBtn.addEventListener("click", startGame)
 
 
 window.addEventListener('load', () => {
-    console.log(gameObj);
+    console.log("loaded");
+    gameObj = new Game()
 });
+
+window.addEventListener("mousedown", disparar);

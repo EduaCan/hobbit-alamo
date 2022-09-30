@@ -10,7 +10,7 @@ class Torre {
     this.h = 70;
     //posicion
     this.x = canvas.width / 2 - this.w / 2;
-    this.y = canvas.height / 2 - this.h / 2;
+    this.y = canvas.height - this.h - 50//canvas.height / 2 - this.h / 2;
   }
 
   //metodos y acciones de la torre

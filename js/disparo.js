@@ -9,8 +9,10 @@ class Disparo {
     this.w = 15;
     this.h = 15;
     //posicion
-    this.x = 400;
-    this.y = 300;
+    this.x = canvas.width/2;
+    this.y = canvas.height - 50;
+    //movimiento
+    this.speed = 1
     }
 
     //metodos y acciones de la bola de fuego
@@ -19,4 +21,7 @@ class Disparo {
         ctx.drawImage(this.img, this.x, this.y, this.w, this.h)
     }
 
-}
+    movimientoDisparo = () => {
+        this.y = this.y - this.speed
+    }
+}   

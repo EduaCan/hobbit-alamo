@@ -9,8 +9,11 @@ class Enemy {
     this.w = 25;
     this.h = 30;
     //posicion
-    this.x = 200;
-    this.y = 300;
+    this.randomNumberX = Math.floor(Math.random() * canvas.width) 
+    this.x = this.randomNumberX;
+    this.y = 0;
+    //movimiento
+    this.speed = 1
   }
 
 
@@ -19,6 +22,9 @@ class Enemy {
     ctx.drawImage(this.img, this.x, this.y, this.w, this.h)
   }
   //movimiento
+  movimientoEnemy = () => {
+    this.y = this.y + this.speed
+  }
   //colision?
   //muerte
 
