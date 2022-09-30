@@ -1,0 +1,44 @@
+body {
+    background-color: burlywood;
+    padding:auto;
+
+}
+
+.container {
+    background-color: burlywood;
+}
+
+
+#splash-screen, #game-screen, #gameover-screen {
+    background-color: burlywood;
+    display: flex;
+    margin: 10vh auto;
+    width: 70vw;
+    height: 70vh;
+    align-self: center;
+    flex-direction: column;
+}
+
+#game-screen, #gameover-screen {
+    display: none;
+}
+
+#splash-main-div {
+    display: flex;
+}
+
+
+#splash-img {
+    height: 40vh;
+    width: 35vw;
+    margin: auto;
+    
+}
+
+
+#start-btn-div {
+    margin-top: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
