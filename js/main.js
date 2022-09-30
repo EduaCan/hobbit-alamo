@@ -48,9 +48,9 @@ const restartGame = () => {
 disparar = (event) => {
     if (event.button === 0) {
         //console.log("click del mouse", gameObj);
-        gameObj.disparar()
+        gameObj.disparar(event.offsetX, event.offsetY)
       }
-      console.log(event.clientX, event.clientY)
+      console.log(event.offsetX, event.offsetY)
    
 }
 

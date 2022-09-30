@@ -34,8 +34,8 @@ class Game {
 
     //colision enemigos con torre
     //crear disparos
-    disparar = () => {
-       let nuevoDisparo = new Disparo()
+    disparar = (destinoX, destinoY) => {
+       let nuevoDisparo = new Disparo(destinoX, destinoY)
        this.disparoArray.push(nuevoDisparo)
     }
     //colision disparos con enemigos
