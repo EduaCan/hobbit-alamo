@@ -12,18 +12,18 @@ class Disparo {
     this.x = canvas.width/2;
     this.y = canvas.height - 50;
     //movimiento
-    this.speed = 10
+    this.speed = 10  //velocidad a gusto
 
-    this.deltaX = destinoX - this.x
-    this.deltaY = destinoY - this.y
+    this.deltaX = destinoX - this.x //diferencia coordenadas x
+    this.deltaY = destinoY - this.y //diferencia coordenadas x
 
-    this.hippo = Math.sqrt(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2))
+    this.hippo = Math.sqrt(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2)) //hipotenusa
 
-    this.sin = this.deltaY / this.hippo
-    this.cos = this.deltaX / this.hippo
+    this.sin = this.deltaY / this.hippo //seno     (.) -
+    this.cos = this.deltaX / this.hippo //coseno    - (.)
 
-    this.composedSpeedX = this.speed * this.cos
-    this.composedSpeedY = this.speed * this.sin
+    this.composedSpeedX = this.speed * this.cos   //vector x
+    this.composedSpeedY = this.speed * this.sin   //vector y
     }
 
     //metodos y acciones de la bola de fuego
