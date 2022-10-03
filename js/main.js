@@ -8,6 +8,7 @@ const gameOverScreen = document.querySelector("#gameover-screen")
 //let startBtnContainer = document.querySelector("#start-btn-div")
 const loadingSpan = document.querySelector("#loading-span")
 const splashMusic = document.querySelector("#splash-music")
+let scoreSpan = document.querySelector("#score-div span")
 
 let booleanEngine = true
 let intervalID
@@ -64,6 +65,7 @@ const startGame = () => {
 const restartGame = () => {
     //ocultar splash screen
     //ocultar gameover-screen
+    splashMusic.play()
     gameOverScreen.style.display = "none";
     startScreen.style.display = "none";
     //mostrar el canvas
@@ -87,6 +89,7 @@ const gameOver = () => {
     gameScreen.style.display = "none"
     startScreen.style.display = "none";
     canvas.style.display = "none";
+    scoreSpan.innerText = gameObj.score * 10;
     //engineSelector()
 }
 

@@ -13,38 +13,46 @@
       <div id="splash-screen" class="container">
         <div id="splash-main-div">
             <div id="context">
-                <p>Context Here</p>
+                <p>In an alternate meta-universe, the hobbits take refuge in Isengard, subdue the white wizard Saruman, and defend themselves against the orcs with his staff. <b>This is the Alamo of the Hobbits.</b></p>
               </div>
               <img id="splash-img" src="./images/hobbits-to-isengard.gif" alt="logo" />
-              <div id="instructions"><p>instructions Here</p></div>
+              <div id="instructions"><ul>
+                <li><b>Instructions</b></li>
+                <li>Shoot with left mouse buton.</li>
+                  <li>Move with WASD keys.</li>
+                
+              </ul></div>
               
             </div>
             <div id="start-btn-div">
                 <button id="start-btn">Start</button>
                 <span id="loading-span">Loading...</span>
             </div>
-            <audio id="splash-music" preload="auto" loop="loop" autoplay="autoplay">
-              <source src="./sounds/taking-the-hobbits-to-isengard.mp3" type="audio/mp3">
+            <audio id="splash-music" type="audio/mp3" preload="auto" loop="loop" autoplay="autoplay">
+              <source src="./sounds/taking-the-hobbits-to-isengard.mp3" type="audio/mp3"> 
+              <source src="./sounds/Battle-Theme-II-v1.2.wav" type="audio/wav">
             </audio>
             
       </div>
 
       <!-- GAME SCREEN -->
       <div id="game-screen" class="container">
-        <canvas id="my-canvas" width="500px" height="500px"></canvas>
-        <p id="score-p">Score: <span>0</span></p>
-        <p id="tip-p">Random tip or advise</p>
+        <canvas id="my-canvas" width="800px" height="600px"></canvas>
+        <!---<p id="score-p">Score: <span>0</span></p>
+        <p id="tip-p">Random tip or advise</p>-->
       </div>
 
       <!-- GAME OVER SCREEN -->
       <div id="gameover-screen" class="container">
         <img src="./images/game_over_small.png" alt="game over logo" />
         <div id="score-div">
-          <p>Name</p>
+          <!--<p>Name</p>-->
           <p>Score: <span>500</span></p>
         </div>
-        <button id="replay-btn">Replay</button>
-        <button id="home-btn">Home</button>
+        <div id="gameover-btn-div">
+          <button id="replay-btn">Replay</button>
+          <button id="home-btn">Home</button>
+        </div>
       </div>
     </section>
     <script src="./js/main.js"></script>

@@ -29,10 +29,10 @@ class Torre {
   moveTor = (direction) => {
     if (direction === "up") {
       this.y = this.y - this.speed
-    this.centroTorreY = this.y + this.h / 2;
+      this.centroTorreY = this.y + this.h / 2;
   } else if (direction === "down") {
       this.y = this.y + this.speed
-    this.centroTorreY = this.y + this.h / 2;
+      this.centroTorreY = this.y + this.h / 2;
   } else if (direction === "left") {
       this.x  = this.x - this.speed
       this.centroTorreX = this.x + this.w / 2;
@@ -40,7 +40,7 @@ class Torre {
       this.x = this.x + this.speed
       this.centroTorreX = this.x + this.w / 2;
   }
-  console.log("terroCenter", this.x, this.y)
+  //console.log("terroCenter", this.x, this.y)
   }
 }
 
