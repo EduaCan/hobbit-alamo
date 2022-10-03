@@ -5,31 +5,29 @@ const ctx = canvas.getContext("2d");
 const startScreen = document.querySelector("#splash-screen");
 const gameScreen =  document.querySelector("#game-screen")
 const gameOverScreen = document.querySelector("#gameover-screen")
+//let startBtnContainer = document.querySelector("#start-btn-div")
+const loadingSpan = document.querySelector("#loading-span")
 
 let booleanEngine = true
-
+let intervalID
 
 //buttons
 const startBtn = document.querySelector("#start-btn");
 const replayBtn = document.querySelector("#replay-btn")
 const homeBtn = document.querySelector("#home-btn")
 
-
 //obj
 let gameObj;
-
-
-
 
 // STATE MANAGEMENT FUNCTIONS
 
 const engineSelector = () => {
     if (booleanEngine === true){
-        startGame()
         booleanEngine = false
+        startGame()
     } else {
-        restartGame()
         booleanEngine = true
+        restartGame()
     }
 }
 
@@ -47,6 +45,7 @@ const startGame = () => {
     gameOverScreen.style.display = "none";
     //mostrar el canvas
     gameScreen.style.display = "block"
+    canvas.style.display = "block"
     //crear de nuevo el juego
     gameObj = new Game();
     //iniciar el juego, metodo gameLoop()
@@ -66,6 +65,7 @@ const restartGame = () => {
     gameOverScreen.style.display = "none";
     startScreen.style.display = "none";
     //mostrar el canvas
+    canvas.style.display = "block"
     gameScreen.style.display = "block"
     //crear de nuevo el juego
     gameObj = new Game();
@@ -81,10 +81,11 @@ const restartGame = () => {
 }
 
 const gameOver = () => {
-    gameOverScreen.style.display = "flex";
+    gameOverScreen.style.display = "block";
     gameScreen.style.display = "none"
     startScreen.style.display = "none";
     canvas.style.display = "none";
+    //engineSelector()
 }
 
 disparar = (event) => {
@@ -106,10 +107,15 @@ replayBtn.addEventListener("click", engineSelector)
 //boton home
 homeBtn.addEventListener("click", goHome)
 
+//loading
 window.addEventListener('load', () => {
-    console.log("loaded");
+    //console.log("loaded");
     gameObj = new Game()
+    startBtn.style.display = "block"
+    loadingSpan.style.display = "none"
 });
 
 //click disparo
 window.addEventListener("mousedown", disparar);
+
+window.addEventListener("mouseup", clearInterval)

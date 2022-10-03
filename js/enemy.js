@@ -1,19 +1,25 @@
 class Enemy {
-  constructor(destinoX, destinoY, difficulty) {  
+  constructor(destinoX, destinoY, difficulty) {
     //todas las propiedades de los enemigos
 
     //imagen
-    this.img = new Image();
-    this.img.src = "../images/enemy.png";
+    this.img1 = new Image();
+    this.img1.src = "../images/enemy1.png";
+    this.img2 = new Image();
+    this.img2.src = "../images/enemy2.png";
+    this.img3 = new Image();
+    this.img3.src = "../images/enemy3.png";
+    this.imgArray = [this.img1, this.img2, this.img3];
+    this.imgControl = 1;
     //tamaño
-    this.w = 25;
-    this.h = 30;
+    this.w = 15;
+    this.h = 20;
     //posicion
     this.randomNumberX = Math.floor(Math.random() * canvas.width - 50);
     this.x = this.randomNumberX + 25;
     this.y = 0;
     //movimiento
-    this.speed = difficulty; 
+    this.speed = Math.random() * difficulty;
 
     this.deltaX = destinoX - this.x; //diferencia coordenadas x
     this.deltaY = destinoY - this.y; //diferencia coordenadas x
@@ -28,9 +34,22 @@ class Enemy {
   }
 
   //dibujado
-  drawEnemy = () => {
-    ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+  drawEnemy = (frames) => {
+    if (frames % 20 === 0) {
+      this.imgControl++;
+    }
+    if (this.imgControl >= 3) {
+      this.imgControl = 1;
+    }
+    ctx.drawImage(
+      this.imgArray[this.imgControl],
+      this.x,
+      this.y,
+      this.w,
+      this.h
+    );
   };
+
   //movimiento
   movimientoEnemy = () => {
     this.x = this.x + this.composedSpeedX;

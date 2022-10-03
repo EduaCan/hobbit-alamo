@@ -22,7 +22,8 @@ class Game {
     this.level = 1;
     //gameOver
     this.isGameOn = true;
-    this.lives = 3;
+    //this.lives = 3;
+    this.heartArray = ["❤️", "❤️", "❤️"]
   }
 
   //todos los metodos y acciones del juego
@@ -100,7 +101,7 @@ class Game {
 
   //niveles
   getLevel = () => {
-    if (this.score = 0) {
+    if (this.score < 10) {
         this.level = 1
     }else{
         if (this.score % 10 === 0) {
@@ -109,13 +110,22 @@ class Game {
     }
   };
 
+  //vidas
+  stayingAlive = () => {
+    ctx.font = '20px serif';
+    ctx.fillText(`${this.heartArray}`, 10, 20);
+  }
+
+  //gameLoop
   gameLoop = () => {
     //0 frames
     this.frames = this.frames + 1;
     //console.log("frames:", this.frames)
     //console.log(this.enemyArray)
+
     //1 limpiar el canvas
     ctx.clearRect(0, 0, canvas.width, canvas.heigth);
+
     //2 acciones y movimientos de los elementos
     this.generarEnemy(this.centroTorreX, this.centroTorreY);
     this.enemyArray.forEach((eachEnemy) => {
@@ -126,16 +136,19 @@ class Game {
     });
     this.colisionDisparoEnemy();
     this.colisionEnemyTorre();
+
     //3 dibujado de los elementos
     this.drawFondo();
     this.torre.drawTorre();
     this.enemyArray.forEach((eachEnemy) => {
-      eachEnemy.drawEnemy();
+      eachEnemy.drawEnemy(this.frames);
     });
     this.disparoArray.forEach((eachDisparo) => {
       eachDisparo.drawDisparo();
     });
+    this.stayingAlive()
     //this.disparo.drawDisparo()
+
     //4 control de recursion
     if (this.isGameOn === true) {
         requestAnimationFrame(this.gameLoop);

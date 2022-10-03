@@ -32,7 +32,6 @@ body {
     height: 40vh;
     width: 35vw;
     margin: auto;
-    
 }
 
 
@@ -41,4 +40,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#start-btn {
+    display: none;
 }
