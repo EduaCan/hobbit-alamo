@@ -126,16 +126,16 @@ window.addEventListener("mousedown", disparar);
 
 window.addEventListener("keydown", (event) => {
     if (event.code === "KeyW") {
-        console.log("torre move")
+        //console.log("torre move")
         gameObj.torre.moveTor("up")
     } else if (event.code === "KeyS") {
-        console.log("torre move")
+        //console.log("torre move")
         gameObj.torre.moveTor("down")
     } else if (event.code === "KeyA") {
-        console.log("torre move")
+        //console.log("torre move")
         gameObj.torre.moveTor("left")
     } else if (event.code === "KeyD") {
-        console.log("torre move")
+        //console.log("torre move")
         gameObj.torre.moveTor("right")
     }
 })

@@ -5,15 +5,15 @@
     body {
         font-size: 15px;
     }
-  }
+ }
+
+
 
 body {
     padding:auto;
     background-image: url(../images/stone-wall.jpg);
 
 }
-
-
 
 #splash-screen, #game-screen, #gameover-screen {
     display: flex;
@@ -35,7 +35,6 @@ body {
 #splash-main-div {
     display: flex;
 }
-
 
 #splash-img {
     height: 40vh;

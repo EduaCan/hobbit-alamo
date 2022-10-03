@@ -39,7 +39,7 @@ class Enemy {
       this.imgControl++;
     }
     if (this.imgControl >= 3) {
-      this.imgControl = 1;
+      this.imgControl = 0;
     }
     ctx.drawImage(
       this.imgArray[this.imgControl],

@@ -101,6 +101,11 @@ class Game {
     this.score = this.score + 1;
   };
 
+  printScore = () => {
+    ctx.font = '20px serif';
+    ctx.fillText(`Score ${this.score * 10}`, canvas.width - 100, 20);
+  }
+
   //niveles
   getLevel = () => {
     if (this.score < 10) {
@@ -142,6 +147,7 @@ class Game {
     //3 dibujado de los elementos
     this.drawFondo();
     this.torre.drawTorre();
+    this.torre.drawHobbits(this.frames, this.torre.directionR)
     this.enemyArray.forEach((eachEnemy) => {
       eachEnemy.drawEnemy(this.frames);
     });
@@ -149,6 +155,7 @@ class Game {
       eachDisparo.drawDisparo();
     });
     this.stayingAlive()
+    this.printScore()
     //this.disparo.drawDisparo()
 
     //4 control de recursion
