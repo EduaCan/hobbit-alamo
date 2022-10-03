@@ -7,6 +7,7 @@ const gameScreen =  document.querySelector("#game-screen")
 const gameOverScreen = document.querySelector("#gameover-screen")
 //let startBtnContainer = document.querySelector("#start-btn-div")
 const loadingSpan = document.querySelector("#loading-span")
+const splashMusic = document.querySelector("#splash-music")
 
 let booleanEngine = true
 let intervalID
@@ -41,6 +42,7 @@ const goHome = () => {
 const startGame = () => {
     //ocultar splash screen
     //ocultar game-over screen
+    splashMusic.play()
     startScreen.style.display = "none";
     gameOverScreen.style.display = "none";
     //mostrar el canvas
@@ -91,11 +93,12 @@ const gameOver = () => {
 disparar = (event) => {
     if (event.button === 0) {
         //console.log("click del mouse", gameObj);
-        gameObj.disparar(event.offsetX, event.offsetY)
+        gameObj.disparar(event.offsetX, event.offsetY, gameObj.torre.cen)
       }
       //console.log(event.offsetX, event.offsetY)
    
 }
+
 
 
 // ADD EVENT LISTENERS
@@ -118,4 +121,20 @@ window.addEventListener('load', () => {
 //click disparo
 window.addEventListener("mousedown", disparar);
 
-window.addEventListener("mouseup", clearInterval)
+window.addEventListener("keydown", (event) => {
+    if (event.code === "KeyW") {
+        console.log("torre move")
+        gameObj.torre.moveTor("up")
+    } else if (event.code === "KeyS") {
+        console.log("torre move")
+        gameObj.torre.moveTor("down")
+    } else if (event.code === "KeyA") {
+        console.log("torre move")
+        gameObj.torre.moveTor("left")
+    } else if (event.code === "KeyD") {
+        console.log("torre move")
+        gameObj.torre.moveTor("right")
+    }
+})
+
+//window.addEventListener("mouseup", clearInterval)

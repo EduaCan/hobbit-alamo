@@ -4,8 +4,8 @@ class Game {
 
     //torre
     this.torre = new Torre();
-    this.centroTorreX = this.torre.x + this.torre.w / 2;
-    this.centroTorreY = this.torre.y + this.torre.h / 2;
+    //this.centroTorreX = this.torre.x + this.torre.w / 2;
+    //this.centroTorreY = this.torre.y + this.torre.h / 2;
     //enemigos
     //this.enemy = new Enemy();
     this.enemyArray = [];
@@ -22,7 +22,7 @@ class Game {
     this.level = 1;
     //gameOver
     this.isGameOn = true;
-    //this.lives = 3;
+    this.lives = 3;
     this.heartArray = ["❤️", "❤️", "❤️"]
   }
 
@@ -53,6 +53,7 @@ class Game {
         let deadEnemy = this.enemyArray.indexOf(eachEnemy);
         this.enemyArray.splice(deadEnemy, 1);
         this.lives--;
+        this.heartArray.pop()
         if (this.lives === 0) {
           this.gameOver();
         }
@@ -63,8 +64,9 @@ class Game {
 
   //crear disparos
   disparar = (destinoX, destinoY) => {
-    let nuevoDisparo = new Disparo(destinoX, destinoY);
+    let nuevoDisparo = new Disparo(destinoX, destinoY, this.torre.centroTorreX, this.torre.centroTorreY);
     this.disparoArray.push(nuevoDisparo);
+    console.log("centroTorre", this.torre.centroTorreX, this.torre.centroTorreY)
   };
 
   //colision disparos con enemigos
@@ -127,7 +129,7 @@ class Game {
     ctx.clearRect(0, 0, canvas.width, canvas.heigth);
 
     //2 acciones y movimientos de los elementos
-    this.generarEnemy(this.centroTorreX, this.centroTorreY);
+    this.generarEnemy(this.torre.centroTorreX, this.torre.centroTorreY);
     this.enemyArray.forEach((eachEnemy) => {
       eachEnemy.movimientoEnemy();
     });

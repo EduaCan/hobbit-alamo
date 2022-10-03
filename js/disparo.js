@@ -1,5 +1,5 @@
 class Disparo {
-    constructor(destinoX, destinoY) {
+    constructor(destinoX, destinoY, origenX, origenY) {
     //todas las propiedades de la bola de fuego
 
     //imagen
@@ -9,8 +9,8 @@ class Disparo {
     this.w = 15;
     this.h = 15;
     //posicion
-    this.x = canvas.width/2;
-    this.y = canvas.height - 50;
+    this.x = origenX;
+    this.y = origenY;
     //movimiento
     this.speed = 10  //velocidad a gusto
 
