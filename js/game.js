@@ -22,8 +22,10 @@ class Game {
     this.level = 1;
     //gameOver
     this.isGameOn = true;
-    this.lives = 3;
+    this.lifes = 3;
     this.heartArray = ["❤️", "❤️", "❤️"]
+    //powerUps
+    this.powerUpArray = []
     //sonidos
     this.losingAudio = new Audio("../sounds/mixkit-trombone-disappoint-744.wav")
     this.shootAudio = new Audio("../sounds/mixkit-funny-squeaky-toy-hits-2813.wav")
@@ -31,6 +33,7 @@ class Game {
     this.orcDeath = new Audio("../sounds/mixkit-cartoon-fart-or-splat-3056.mp3")
     this.movingTorre = new Audio("../sounds/mixkit-falling-into-mud-surface-385.wav")
     this.movingTorre.volume = 0.1;
+    this.getPowerUp = new Audio()
   }
 
   //todos los metodos y acciones del juego
@@ -59,13 +62,13 @@ class Game {
       ) {
         let deadEnemy = this.enemyArray.indexOf(eachEnemy);
         this.enemyArray.splice(deadEnemy, 1);
-        this.lives--;
+        this.lifes--;
         this.heartArray.pop()
         this.orcLaught.cloneNode(true).play()
-        if (this.lives === 0) {
+        if (this.lifes === 0) {
           this.gameOver();
         }
-        //console.log("game on", this.isGameOn,"lives", this.lives);
+        //console.log("game on", this.isGameOn,"lifes", this.lifes);
       }
     });
   };
@@ -92,6 +95,10 @@ class Game {
         ) {
           let deadEnemy = this.enemyArray.indexOf(eachEnemy);
           let deadDisaparo = this.disparoArray.indexOf(eachDisparo);
+          if (Math.floor(Math.random() * (5 + this.level)) === 0) {
+            let newPowerUp = new PowerUp(this.enemyArray[deadEnemy].x, this.enemyArray[deadEnemy].y, this.frames)
+            this.powerUpArray.push(newPowerUp)
+          }
           this.enemyArray.splice(deadEnemy, 1);
           this.disparoArray.splice(deadDisaparo, 1);
           this.getScore();
@@ -103,6 +110,35 @@ class Game {
       });
     });
   };
+
+  //collision disparos con powerUp
+  colisionDisparoPowerUp = () => {
+    this.powerUpArray.forEach((eachPowerUp) => {
+      this.disparoArray.forEach((eachDisparo) => {
+        if (
+          eachPowerUp.x < eachDisparo.x + eachDisparo.w &&
+          eachPowerUp.x + eachPowerUp.w > eachDisparo.x &&
+          eachPowerUp.y < eachDisparo.y + eachDisparo.h &&
+          eachPowerUp.h + eachPowerUp.y > eachDisparo.y
+        ) {
+          let deadPowerUp = this.powerUpArray.indexOf(eachPowerUp);
+          let deadDisparo = this.disparoArray.indexOf(eachDisparo);
+          this.powerUpArray.splice(deadPowerUp, 1);
+          this.disparoArray.splice(deadDisparo, 1);
+          this.getALife()
+          //console.log("score", this.score, "level", this.level);
+          this.getPowerUp.cloneNode(true).play()
+
+        }
+      });
+    });
+  }
+
+  //ganas vida con powerUp
+  getALife = () => {
+    this.lifes = this.lifes + 1
+    this.heartArray.push("❤️")
+  }
 
   //fin del juego
   gameOver = () => {
@@ -156,6 +192,7 @@ class Game {
     });
     this.colisionDisparoEnemy();
     this.colisionEnemyTorre();
+    this.colisionDisparoPowerUp()
 
     //3 dibujado de los elementos
     this.drawFondo();
@@ -167,6 +204,13 @@ class Game {
     this.disparoArray.forEach((eachDisparo) => {
       eachDisparo.drawDisparo();
     });
+    this.powerUpArray.forEach( (eachPowerUp) => {
+      eachPowerUp.drawPowerUp()
+      //let indexPowerUp = this.powerUpArray.indexOf(eachPowerUp)
+      if (this.frames - eachPowerUp.initialFrame >= 300) {
+        this.powerUpArray.shift()
+      }
+    })
     this.stayingAlive()
     this.printScore()
     //this.disparo.drawDisparo()

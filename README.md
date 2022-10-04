@@ -29,6 +29,7 @@ Una torre situada en el centro inferior del mapa va disparando a enemigos que se
 - tower.js para la class de la torre central/jugador.
 - enemy.js para la class de los enemigos.
 - disparo.js para la class de los proyectiles.
+- powerup.js para la class de los power Up's
 
 ## main.js
 
@@ -56,6 +57,8 @@ Una torre situada en el centro inferior del mapa va disparando a enemigos que se
 - colisionEnemyTorre() {}
 - disparar(destinoX, destinoY) {}
 - colisionDisparoEnemy() {}
+- colisionDisparoPowerUp() {}
+- getALife() {}
 - gameOver() {}
 - getScore() {}
 - printScore() {}
@@ -133,6 +136,18 @@ Una torre situada en el centro inferior del mapa va disparando a enemigos que se
 }
 - drawDisparo() {}
 - movimientoDisparo() {}
+
+## powerup.js
+
+powerUp(placeX, placeY, frames) {
+    this.x
+    this.y
+    this.w
+    this.h
+    this.img
+    this.initialFrame
+}
+- drawPowerUp
 
 # States and Transitions
 
