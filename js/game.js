@@ -33,7 +33,7 @@ class Game {
     this.orcDeath = new Audio("../sounds/mixkit-cartoon-fart-or-splat-3056.mp3")
     this.movingTorre = new Audio("../sounds/mixkit-falling-into-mud-surface-385.wav")
     this.movingTorre.volume = 0.1;
-    this.getPowerUp = new Audio()
+    this.getPowerUp = new Audio("../sounds/mixkit-drum-joke-accent-579.wav")
   }
 
   //todos los metodos y acciones del juego
@@ -136,8 +136,12 @@ class Game {
 
   //ganas vida con powerUp
   getALife = () => {
+    if (Math.floor(Math.random() * 6) === 0){
+      this.heartArray.push("💩")
+    } else {
+      this.heartArray.push("❤️")
+    }
     this.lifes = this.lifes + 1
-    this.heartArray.push("❤️")
   }
 
   //fin del juego
