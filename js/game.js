@@ -30,7 +30,7 @@ class Game {
     this.orcLaught = new Audio("../sounds/mixkit-creepy-little-creature-2873.mp3")
     this.orcDeath = new Audio("../sounds/mixkit-cartoon-fart-or-splat-3056.mp3")
     this.movingTorre = new Audio("../sounds/mixkit-falling-into-mud-surface-385.wav")
-    this.movingTorre.volume = 0.4;
+    this.movingTorre.volume = 0.1;
   }
 
   //todos los metodos y acciones del juego
