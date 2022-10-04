@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=MedievalSharp&display=swap');
 
 
-@media screen and (min-width: 900px) {
+@media screen and (max-width: 900px) {
     body {
-        font-size: 15px;
+        font-size: 14px;
     }
- }
+}
 
 
 
@@ -26,6 +26,21 @@ body {
 
 #game-screen, #gameover-screen {
     display: none;
+}
+
+h1 {
+    font-size: 3em;
+    padding-bottom: 2vh;
+    padding-top: 2.5vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    text-align: center;
+    background-image: url("../images/parchment.png");
+    background-size: 85vw 20vh;
+    background-repeat: no-repeat;
+    font-family: 'MedievalSharp', cursive;
+    text-shadow: 0px 0px 10px black;
+    color: rgba(87, 22, 22, 0.55);
 }
 
 #gameover-screen img {

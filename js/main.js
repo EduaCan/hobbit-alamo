@@ -7,8 +7,11 @@ const gameScreen =  document.querySelector("#game-screen")
 const gameOverScreen = document.querySelector("#gameover-screen")
 //let startBtnContainer = document.querySelector("#start-btn-div")
 const loadingSpan = document.querySelector("#loading-span")
-const splashMusic = document.querySelector("#splash-music")
 let scoreSpan = document.querySelector("#score-div span")
+
+// SOUNDS
+const splashMusic = document.querySelector("#splash-music")
+const battleAudio = document.querySelector("#battle-audio")
 
 let booleanEngine = true
 let intervalID
@@ -43,7 +46,8 @@ const goHome = () => {
 const startGame = () => {
     //ocultar splash screen
     //ocultar game-over screen
-    splashMusic.play()
+    splashMusic.pause()
+    battleAudio.play()
     startScreen.style.display = "none";
     gameOverScreen.style.display = "none";
     //mostrar el canvas
@@ -58,6 +62,7 @@ const startGame = () => {
         if (gameObj.isGameOn === false) {
             gameOver()
             clearInterval(intervalID)
+            gameObj.losingAudio.cloneNode(true).play()
         }
     }, 2000)
 }
@@ -65,7 +70,8 @@ const startGame = () => {
 const restartGame = () => {
     //ocultar splash screen
     //ocultar gameover-screen
-    splashMusic.play()
+    splashMusic.pause()
+    battleAudio.play()
     gameOverScreen.style.display = "none";
     startScreen.style.display = "none";
     //mostrar el canvas
@@ -85,6 +91,7 @@ const restartGame = () => {
 }
 
 const gameOver = () => {
+    battleAudio.pause()
     gameOverScreen.style.display = "block";
     gameScreen.style.display = "none"
     startScreen.style.display = "none";
@@ -119,6 +126,7 @@ window.addEventListener('load', () => {
     gameObj = new Game()
     startBtn.style.display = "block"
     loadingSpan.style.display = "none"
+    //! splashMusic.play()  // lo quito para no volverme loco
 });
 
 //click disparo
@@ -128,15 +136,19 @@ window.addEventListener("keydown", (event) => {
     if (event.code === "KeyW") {
         //console.log("torre move")
         gameObj.torre.moveTor("up")
+        //gameObj.movingTorre.cloneNode(true).play()
     } else if (event.code === "KeyS") {
         //console.log("torre move")
+        //gameObj.movingTorre.cloneNode(true).play()
         gameObj.torre.moveTor("down")
     } else if (event.code === "KeyA") {
         //console.log("torre move")
+        //gameObj.movingTorre.cloneNode(true).play()
         gameObj.torre.moveTor("left")
     } else if (event.code === "KeyD") {
         //console.log("torre move")
         gameObj.torre.moveTor("right")
+        //gameObj.movingTorre.cloneNode(true).play()
     }
 })
 

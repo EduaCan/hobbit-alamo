@@ -11,28 +11,39 @@
     <section class="container">
       <!-- SPLASH SCREEN -->
       <div id="splash-screen" class="container">
+        <h1>The Alamo of the Hobbits</h1>
         <div id="splash-main-div">
-            <div id="context">
-                <p>In an alternate meta-universe, the hobbits take refuge in Isengard, subdue the white wizard Saruman, and defend themselves against the orcs with his staff. <b>This is the Alamo of the Hobbits.</b></p>
-              </div>
-              <img id="splash-img" src="./images/hobbits-to-isengard.gif" alt="logo" />
-              <div id="instructions"><ul>
-                <li><b>Instructions</b></li>
-                <li>Shoot with left mouse buton.</li>
-                  <li>Move with WASD keys.</li>
-                
-              </ul></div>
-              
-            </div>
-            <div id="start-btn-div">
-                <button id="start-btn">Start</button>
-                <span id="loading-span">Loading...</span>
-            </div>
-            <audio id="splash-music" type="audio/mp3" preload="auto" loop="loop" autoplay="autoplay">
-              <source src="./sounds/taking-the-hobbits-to-isengard.mp3" type="audio/mp3"> 
-              <source src="./sounds/Battle-Theme-II-v1.2.wav" type="audio/wav">
-            </audio>
-            
+          <div id="context">
+            <p>
+              In an alternate meta-universe, the hobbits take refuge in
+              Isengard, subdue the white wizard Saruman, and defend themselves
+              against the orcs with his staff.
+              <b>This is the Alamo of the Hobbits.</b>
+            </p>
+          </div>
+          <img
+            id="splash-img"
+            src="./images/hobbits-to-isengard.gif"
+            alt="logo"
+          />
+          <div id="instructions">
+            <ul>
+              <li><b>Instructions</b></li>
+              <li>Squeze Saruman's staff with left mouse button.</li>
+              <li>Tower can be pushed by Hobbits with WASD keys.</li>
+            </ul>
+          </div>
+        </div>
+        <div id="start-btn-div">
+          <button id="start-btn">Start</button>
+          <span id="loading-span">Loading...</span>
+        </div>
+        <audio id="splash-music" preload="auto" loop="loop" autoplay="autoplay">
+          <source
+            src="./sounds/taking-the-hobbits-to-isengard.mp3"
+            type="audio/mp3"
+          />
+        </audio>
       </div>
 
       <!-- GAME SCREEN -->
@@ -40,6 +51,7 @@
         <canvas id="my-canvas" width="800px" height="600px"></canvas>
         <!---<p id="score-p">Score: <span>0</span></p>
         <p id="tip-p">Random tip or advise</p>-->
+        <audio id="battle-audio" src="./sounds/Battle-Theme-II-v1.2.wav"></audio>
       </div>
 
       <!-- GAME OVER SCREEN -->
@@ -60,8 +72,5 @@
     <script src="./js/torre.js"></script>
     <script src="./js/enemy.js"></script>
     <script src="./js/disparo.js"></script>
-
-
-
   </body>
 </html>

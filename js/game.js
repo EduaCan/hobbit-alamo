@@ -24,6 +24,13 @@ class Game {
     this.isGameOn = true;
     this.lives = 3;
     this.heartArray = ["❤️", "❤️", "❤️"]
+    //sonidos
+    this.losingAudio = new Audio("../sounds/mixkit-trombone-disappoint-744.wav")
+    this.shootAudio = new Audio("../sounds/mixkit-funny-squeaky-toy-hits-2813.wav")
+    this.orcLaught = new Audio("../sounds/mixkit-creepy-little-creature-2873.mp3")
+    this.orcDeath = new Audio("../sounds/mixkit-cartoon-fart-or-splat-3056.mp3")
+    this.movingTorre = new Audio("../sounds/mixkit-falling-into-mud-surface-385.wav")
+    this.movingTorre.volume = 0.4;
   }
 
   //todos los metodos y acciones del juego
@@ -54,6 +61,7 @@ class Game {
         this.enemyArray.splice(deadEnemy, 1);
         this.lives--;
         this.heartArray.pop()
+        this.orcLaught.cloneNode(true).play()
         if (this.lives === 0) {
           this.gameOver();
         }
@@ -66,7 +74,10 @@ class Game {
   disparar = (destinoX, destinoY) => {
     let nuevoDisparo = new Disparo(destinoX, destinoY, this.torre.centroTorreX, this.torre.centroTorreY);
     this.disparoArray.push(nuevoDisparo);
-    console.log("centroTorre", this.torre.centroTorreX, this.torre.centroTorreY)
+    if (canvas.style.display === "block" ) {
+      this.shootAudio.cloneNode(true).play()
+    }
+    //console.log("centroTorre", this.torre.centroTorreX, this.torre.centroTorreY)
   };
 
   //colision disparos con enemigos
@@ -85,7 +96,9 @@ class Game {
           this.disparoArray.splice(deadDisaparo, 1);
           this.getScore();
           this.getLevel();
-          console.log("score", this.score, "level", this.level);
+          //console.log("score", this.score, "level", this.level);
+          this.orcDeath.cloneNode(true).play()
+
         }
       });
     });

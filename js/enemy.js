@@ -32,7 +32,6 @@ class Enemy {
     this.composedSpeedX = this.speed * this.cos; //vector x
     this.composedSpeedY = this.speed * this.sin; //vector y
     //sonidos
-    
   }
 
   //dibujado
