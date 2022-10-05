@@ -51,13 +51,18 @@ const showRanking = () => {
       return 0;
     }
   });
-  //console.log(rankingArr);
+  console.log(rankingArr);
   //rankingArr.splice(rankingArr.indexOf("loglevel"), 1)
   //console.log("aftersdplice", rankingArr);
   for (let iteration = 0; iteration < rankingArr.length; iteration++) {
     if (rankingArr[iteration][0] !== "loglevel") {
-      scoreNameUl.innerHTML += `<li>${rankingArr[iteration][0]}</li>`;
-      scoreNumberUl.innerHTML += `<li>${rankingArr[iteration][1]}</li>`;
+      if (rankingArr[iteration][0] === "") {
+        scoreNameUl.innerHTML += `<li>Unn4m3d</li>`;
+        scoreNumberUl.innerHTML += `<li>${rankingArr[iteration][1]}</li>`;
+      } else {
+        scoreNameUl.innerHTML += `<li>${rankingArr[iteration][0]}</li>`;
+        scoreNumberUl.innerHTML += `<li>${rankingArr[iteration][1]}</li>`;
+      }
     }
     if (iteration > 9) {
       break;
@@ -158,6 +163,12 @@ startBtn.addEventListener("click", engineSelector);
 replayBtn.addEventListener("click", engineSelector);
 //boton home
 homeBtn.addEventListener("click", goHome);
+//input name
+nameInput.addEventListener("keydown", (event) => {
+  if (event.code === "Enter") {
+    startBtn.click()
+  }
+})
 
 //loading
 window.addEventListener("load", () => {
@@ -172,6 +183,7 @@ window.addEventListener("load", () => {
 //click disparo
 window.addEventListener("mousedown", disparar);
 
+//movimientos torre
 window.addEventListener("keydown", (event) => {
   if (event.code === "KeyW") {
     gameObj.torre.movement["up"] = true;

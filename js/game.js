@@ -45,7 +45,7 @@ class Game {
 
   //crear enemigos
   generarEnemy = (destinoX, destinoY) => {
-    if (this.frames % 20 === 0) {
+    if (this.frames % 10 === 0) {
       let nuevoEnemy = new Enemy(destinoX, destinoY, this.level);
       this.enemyArray.push(nuevoEnemy);
     }
@@ -198,6 +198,7 @@ class Game {
     this.colisionEnemyTorre();
     this.colisionDisparoPowerUp()
     this.torre.moveTorre()
+    
     //3 dibujado de los elementos
     this.drawFondo();
     this.torre.drawTorre();

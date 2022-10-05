@@ -24,7 +24,7 @@ class Torre {
     this.hobbitImgArrayL = [this.img1L, this.img2L, this.img3L];
     //imageControl
     this.imgControl = 0;
-    this.directionR = true;
+    this.directionR = true; //para que los hobbits empujen por el lado correcto
     //tamaño
     this.w = 35;
     this.h = 70;
@@ -80,47 +80,57 @@ class Torre {
     }
   };
 
+  moveUp = () => {
+    if (this.y > 0) {
+      this.y = this.y - this.speed;
+      this.centroTorreY = this.y + this.h / 2;
+    }
+  }
+
+  moveDown = () => {
+    if (this.y + this.h < canvas.height) {
+      this.y = this.y + this.speed;
+      this.centroTorreY = this.y + this.h / 2;
+    }
+  }
+
+  moveRight = () => {
+    if (this.x + this.w < canvas.width) {
+      this.x = this.x + this.speed;
+      this.centroTorreX = this.x + this.w / 2;
+      this.directionR = true;
+    }
+  }
+
+  moveLeft = () => {
+    if (this.x > 0) {
+      this.x = this.x - this.speed;
+      this.centroTorreX = this.x + this.w / 2;
+      this.directionR = false;
+    }
+  }
+
   moveTorre = () => {
     if (this.movement["up"] && this.movement["right"]) {
-      this.x = this.x + this.speed;
-      this.centroTorreX = this.x + this.w / 2;
-      this.directionR = true;
-      this.y = this.y - this.speed;
-      this.centroTorreY = this.y + this.h / 2;
+      this.moveUp()
+      this.moveRight()
     } else if(this.movement["up"] && this.movement["left"]) {
-      this.x = this.x - this.speed;
-      this.centroTorreX = this.x + this.w / 2;
-      this.directionR = false;
-      this.y = this.y - this.speed;
-      this.centroTorreY = this.y + this.h / 2;
+      this.moveUp()
+      this.moveLeft()
     }else if (this.movement["down"] && this.movement["right"]) {
-      this.x = this.x + this.speed;
-      this.centroTorreX = this.x + this.w / 2;
-      this.directionR = true;
-      this.y = this.y + this.speed;
-      this.centroTorreY = this.y + this.h / 2;
+     this.moveDown()
+     this.moveRight()
     } else if (this.movement["down"] && this.movement["left"]) {
-      this.x = this.x - this.speed;
-      this.centroTorreX = this.x + this.w / 2;
-      this.directionR = false;
-      this.y = this.y + this.speed;
-      this.centroTorreY = this.y + this.h / 2;
+      this.moveDown()
+      this.moveLeft()
     } else if (this.movement["up"]) {
-      this.y = this.y - this.speed;
-      this.centroTorreY = this.y + this.h / 2;
-      this.directionR = true;
+      this.moveUp()
     } else if (this.movement["down"]) {
-      this.y = this.y + this.speed;
-      this.centroTorreY = this.y + this.h / 2;
-      this.directionR = false;
+      this.moveDown()
     } else if (this.movement["left"]) {
-      this.x = this.x - this.speed;
-      this.centroTorreX = this.x + this.w / 2;
-      this.directionR = false;
+      this.moveLeft()
     } else if (this.movement["right"]) {
-      this.x = this.x + this.speed;
-      this.centroTorreX = this.x + this.w / 2;
-      this.directionR = true;
+      this.moveRight()
       //console.log("terroCenter", this.x, this.y)
     }
   };

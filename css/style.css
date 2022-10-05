@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=MedievalSharp&display=swap');
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
     body {
         font-size: 14px;
     }
@@ -12,7 +12,7 @@
 body {
     padding:auto;
     background-image: url(../images/stone-wall.jpg);
-
+    font-size: 18px;
 }
 
 section {
@@ -49,6 +49,7 @@ h1 {
 
 #gameover-screen img {
     width: 80vw;
+    max-height: 33vh;
 }
 
 #splash-main-div {
@@ -99,6 +100,10 @@ button {
     width: 25vw;
     padding: 3vh 2vw 6vh 5vw;
     margin: 2vh 2vw;
+}
+
+#context-p {
+    padding-top: 2vh;
 }
 
 #gameover-btn-div {
