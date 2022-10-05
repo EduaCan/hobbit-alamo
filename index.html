@@ -36,6 +36,7 @@
           </div>
         </div>
         <div id="start-btn-div">
+          <input id="name-input" type="text" placeholder="Your name here" />
           <button id="start-btn">Start</button>
           <span id="loading-span">Loading...</span>
         </div>
@@ -52,7 +53,10 @@
         <canvas id="my-canvas" width="1000px" height="520px"></canvas>
         <!---<p id="score-p">Score: <span>0</span></p>
         <p id="tip-p">Random tip or advise</p>-->
-        <audio id="battle-audio" src="./sounds/Battle-Theme-II-v1.2.wav"></audio>
+        <audio
+          id="battle-audio"
+          src="./sounds/Battle-Theme-II-v1.2.wav"
+        ></audio>
       </div>
 
       <!-- GAME OVER SCREEN -->
@@ -64,6 +68,13 @@
         </div>
         <div id="gameover-btn-div">
           <button id="replay-btn">Replay</button>
+          <div id="score-ul-div">
+            <h3>TOP TEN</h3>
+            <div>
+              <ul class="score-ul" id="score-name-ul"></ul>
+              <ul class="score-ul" id="score-number-ul"></ul>
+            </div>
+          </div>
           <button id="home-btn">Home</button>
         </div>
       </div>

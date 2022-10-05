@@ -6,7 +6,10 @@ const startScreen = document.querySelector("#splash-screen");
 const gameScreen = document.querySelector("#game-screen");
 const gameOverScreen = document.querySelector("#gameover-screen");
 const loadingSpan = document.querySelector("#loading-span");
-let scoreSpan = document.querySelector("#score-div span");
+const scoreSpan = document.querySelector("#score-div span");
+const nameInput = document.querySelector("#name-input");
+const scoreNameUl = document.querySelector("#score-name-ul");
+const scoreNumberUl = document.querySelector("#score-number-ul");
 
 // SOUNDS
 const splashMusic = document.querySelector("#splash-music");
@@ -24,6 +27,43 @@ const homeBtn = document.querySelector("#home-btn");
 let gameObj;
 
 // STATE MANAGEMENT FUNCTIONS
+
+const saveLocalStorage = () => {
+  //localStorage.clear()
+  localStorage.setItem(nameInput.value, gameObj.score * 10);
+};
+
+const showRanking = () => {
+  let rankingArr = [];
+  scoreNameUl.innerHTML = "";
+  scoreNumberUl.innerHTML = "";
+
+  for (let item in localStorage) {
+    rankingArr.push([item, localStorage[item]]);
+  }
+  rankingArr.splice(-6); //quito las mierdas que vienen por defecto
+  rankingArr.sort((elem2, elem1) => {
+    if (Number(elem2[1]) > Number(elem1[1])) {
+      return -1;
+    } else if (Number(elem1[1]) > Number(elem2[1])) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+  //console.log(rankingArr);
+  //rankingArr.splice(rankingArr.indexOf("loglevel"), 1)
+  //console.log("aftersdplice", rankingArr);
+  for (let iteration = 0; iteration < rankingArr.length; iteration++) {
+    if (rankingArr[iteration][0] !== "loglevel") {
+      scoreNameUl.innerHTML += `<li>${rankingArr[iteration][0]}</li>`;
+      scoreNumberUl.innerHTML += `<li>${rankingArr[iteration][1]}</li>`;
+    }
+    if (iteration > 9) {
+      break;
+    }
+  }
+};
 
 const engineSelector = () => {
   if (booleanEngine === true) {
@@ -90,19 +130,22 @@ const restartGame = () => {
 };
 
 const gameOver = () => {
+  saveLocalStorage();
   battleAudio.pause();
   gameOverScreen.style.display = "block";
   gameScreen.style.display = "none";
   startScreen.style.display = "none";
   canvas.style.display = "none";
   scoreSpan.innerText = gameObj.score * 10;
+  showRanking();
   //engineSelector()
 };
 
 disparar = (event) => {
   if (event.button === 0) {
     //console.log("click del mouse", gameObj);
-      gameObj.disparar(event.offsetX, event.offsetY, gameObj.torre.cen);
+    gameObj.disparar(event.offsetX, event.offsetY, gameObj.torre.cen);
+    //console.log("local storage", localStorage, "name",localStorage.getItem(nameInput.value))  //! prueba
   }
   //console.log(event.offsetX, event.offsetY)
 };
@@ -121,6 +164,7 @@ window.addEventListener("load", () => {
   //console.log("loaded");
   gameObj = new Game();
   startBtn.style.display = "block";
+  nameInput.style.display = "block";
   loadingSpan.style.display = "none";
   //! splashMusic.play()  // lo quito para no volverme loco
 });
@@ -131,19 +175,19 @@ window.addEventListener("mousedown", disparar);
 window.addEventListener("keydown", (event) => {
   if (event.code === "KeyW") {
     gameObj.torre.movement["up"] = true;
-    console.log(gameObj.torre.movement)
+    //console.log(gameObj.torre.movement)
     //gameObj.movingTorre.cloneNode(true).play()
   } else if (event.code === "KeyS") {
     //gameObj.movingTorre.cloneNode(true).play()
     gameObj.torre.movement["down"] = true;
-    console.log(gameObj.torre.movement)
+    //console.log(gameObj.torre.movement)
   } else if (event.code === "KeyA") {
     //gameObj.movingTorre.cloneNode(true).play()
     gameObj.torre.movement["left"] = true;
-    console.log(gameObj.torre.movement)
+    //console.log(gameObj.torre.movement)
   } else if (event.code === "KeyD") {
     gameObj.torre.movement["right"] = true;
-    console.log(gameObj.torre.movement)
+    //console.log(gameObj.torre.movement)
     //gameObj.movingTorre.cloneNode(true).play()
   }
 });
@@ -151,23 +195,19 @@ window.addEventListener("keydown", (event) => {
 window.addEventListener("keyup", (event) => {
   if (event.code === "KeyW") {
     gameObj.torre.movement["up"] = false;
-    console.log(gameObj.torre.movement)
+    //console.log(gameObj.torre.movement)
     //gameObj.movingTorre.cloneNode(true).play()
   } else if (event.code === "KeyS") {
     //gameObj.movingTorre.cloneNode(true).play()
     gameObj.torre.movement["down"] = false;
-    console.log(gameObj.torre.movement)
+    //console.log(gameObj.torre.movement)
   } else if (event.code === "KeyA") {
     //gameObj.movingTorre.cloneNode(true).play()
     gameObj.torre.movement["left"] = false;
-    console.log(gameObj.torre.movement)
+    //console.log(gameObj.torre.movement)
   } else if (event.code === "KeyD") {
     gameObj.torre.movement["right"] = false;
-    console.log(gameObj.torre.movement)
+    //console.log(gameObj.torre.movement)
     //gameObj.movingTorre.cloneNode(true).play()
   }
-})
-
-
-
-//window.addEventListener("mouseup", clearInterval)
+});
