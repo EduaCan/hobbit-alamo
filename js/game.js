@@ -11,7 +11,7 @@ class Game {
     this.enemyArray = [];
     //fondo
     this.fondo = new Image();
-    this.fondo.src = "../images/background.png";
+    this.fondo.src = "./images/background.png";
     //disparos
     //this.disparo = new Disparo()
     this.disparoArray = [];
@@ -27,13 +27,13 @@ class Game {
     //powerUps
     this.powerUpArray = []
     //sonidos
-    this.losingAudio = new Audio("../sounds/mixkit-trombone-disappoint-744.wav")
-    this.shootAudio = new Audio("../sounds/mixkit-funny-squeaky-toy-hits-2813.wav")
-    this.orcLaught = new Audio("../sounds/mixkit-creepy-little-creature-2873.mp3")
-    this.orcDeath = new Audio("../sounds/mixkit-cartoon-fart-or-splat-3056.mp3")
-    this.movingTorre = new Audio("../sounds/mixkit-falling-into-mud-surface-385.wav")
+    this.losingAudio = new Audio("./sounds/mixkit-trombone-disappoint-744.wav")
+    this.shootAudio = new Audio("./sounds/mixkit-funny-squeaky-toy-hits-2813.wav")
+    this.orcLaught = new Audio("./sounds/mixkit-creepy-little-creature-2873.mp3")
+    this.orcDeath = new Audio("./sounds/mixkit-cartoon-fart-or-splat-3056.mp3")
+    this.movingTorre = new Audio("./sounds/mixkit-falling-into-mud-surface-385.wav")
     this.movingTorre.volume = 0.1;
-    this.getPowerUp = new Audio("../sounds/mixkit-drum-joke-accent-579.wav")
+    this.getPowerUp = new Audio("./sounds/mixkit-drum-joke-accent-579.wav")
   }
 
   //todos los metodos y acciones del juego

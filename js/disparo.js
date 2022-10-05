@@ -4,7 +4,7 @@ class Disparo {
 
     //imagen
     this.img = new Image();
-    this.img.src = "../images/disparo.png";
+    this.img.src = "./images/disparo.png";
     //tamaño
     this.w = 15;
     this.h = 15;

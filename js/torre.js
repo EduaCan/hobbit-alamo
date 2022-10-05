@@ -4,23 +4,23 @@ class Torre {
 
     //imagen
     this.img = new Image();
-    this.img.src = "../images/torreMagica.png";
+    this.img.src = "./images/torreMagica.png";
     //imagen hobbits
     //right
     this.img1R = new Image();
-    this.img1R.src = "../images/hobbit1r.png";
+    this.img1R.src = "./images/hobbit1r.png";
     this.img2R = new Image();
-    this.img2R.src = "../images/hobbit2r.png";
+    this.img2R.src = "./images/hobbit2r.png";
     this.img3R = new Image();
-    this.img3R.src = "../images/hobbit3r.png";
+    this.img3R.src = "./images/hobbit3r.png";
     this.hobbitImgArrayR = [this.img1R, this.img2R, this.img3R];
     //left
     this.img1L = new Image();
-    this.img1L.src = "../images/hobbit1l.png";
+    this.img1L.src = "./images/hobbit1l.png";
     this.img2L = new Image();
-    this.img2L.src = "../images/hobbit2l.png";
+    this.img2L.src = "./images/hobbit2l.png";
     this.img3L = new Image();
-    this.img3L.src = "../images/hobbit3l.png";
+    this.img3L.src = "./images/hobbit3l.png";
     this.hobbitImgArrayL = [this.img1L, this.img2L, this.img3L];
     //imageControl
     this.imgControl = 0;

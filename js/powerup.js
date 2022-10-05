@@ -5,7 +5,7 @@ class PowerUp {
         this.w = 15
         this.h = 15
         this.img = new Image()
-        this.img.src = "../images/up-mushroom.png"
+        this.img.src = "./images/up-mushroom.png"
         this.initialFrame = frames
     }
 
