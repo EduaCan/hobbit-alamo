@@ -130,22 +130,44 @@ window.addEventListener("mousedown", disparar);
 
 window.addEventListener("keydown", (event) => {
   if (event.code === "KeyW") {
-    //console.log("torre move")
-    gameObj.torre.moveTor("up");
+    gameObj.torre.movement["up"] = true;
+    console.log(gameObj.torre.movement)
     //gameObj.movingTorre.cloneNode(true).play()
   } else if (event.code === "KeyS") {
-    //console.log("torre move")
     //gameObj.movingTorre.cloneNode(true).play()
-    gameObj.torre.moveTor("down");
+    gameObj.torre.movement["down"] = true;
+    console.log(gameObj.torre.movement)
   } else if (event.code === "KeyA") {
-    //console.log("torre move")
     //gameObj.movingTorre.cloneNode(true).play()
-    gameObj.torre.moveTor("left");
+    gameObj.torre.movement["left"] = true;
+    console.log(gameObj.torre.movement)
   } else if (event.code === "KeyD") {
-    //console.log("torre move")
-    gameObj.torre.moveTor("right");
+    gameObj.torre.movement["right"] = true;
+    console.log(gameObj.torre.movement)
     //gameObj.movingTorre.cloneNode(true).play()
   }
 });
+
+window.addEventListener("keyup", (event) => {
+  if (event.code === "KeyW") {
+    gameObj.torre.movement["up"] = false;
+    console.log(gameObj.torre.movement)
+    //gameObj.movingTorre.cloneNode(true).play()
+  } else if (event.code === "KeyS") {
+    //gameObj.movingTorre.cloneNode(true).play()
+    gameObj.torre.movement["down"] = false;
+    console.log(gameObj.torre.movement)
+  } else if (event.code === "KeyA") {
+    //gameObj.movingTorre.cloneNode(true).play()
+    gameObj.torre.movement["left"] = false;
+    console.log(gameObj.torre.movement)
+  } else if (event.code === "KeyD") {
+    gameObj.torre.movement["right"] = false;
+    console.log(gameObj.torre.movement)
+    //gameObj.movingTorre.cloneNode(true).play()
+  }
+})
+
+
 
 //window.addEventListener("mouseup", clearInterval)

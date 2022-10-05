@@ -37,6 +37,9 @@ class Torre {
 
     this.centroTorreX = this.x + this.w / 2;
     this.centroTorreY = this.y + this.h / 2;
+
+    //direccion de movimiento
+    this.movement = { up: false, down: false, left: false, right: false };
   }
 
   //metodos y acciones de la torre
@@ -77,30 +80,48 @@ class Torre {
     }
   };
 
-  moveTor = (direction) => {
-    if (direction === "up") {
+  moveTorre = () => {
+    if (this.movement["up"] && this.movement["right"]) {
+      this.x = this.x + this.speed;
+      this.centroTorreX = this.x + this.w / 2;
+      this.directionR = true;
       this.y = this.y - this.speed;
       this.centroTorreY = this.y + this.h / 2;
-      this.directionR = true;
-    } else if (direction === "down") {
-      this.y = this.y + this.speed;
-      this.centroTorreY = this.y + this.h / 2;
-      this.directionR = false;
-    } else if (direction === "left") {
+    } else if(this.movement["up"] && this.movement["left"]) {
       this.x = this.x - this.speed;
       this.centroTorreX = this.x + this.w / 2;
       this.directionR = false;
-    } else if (direction === "right") {
-      this.x = this.x + this.speed;
-      this.centroTorreX = this.x + this.w / 2;
-      this.directionR = true;
-    } else if (direction === "upright") {
-      this.x = this.x + this.speed;
-      this.centroTorreX = this.x + this.w / 2;
-      this.directionR = true;
       this.y = this.y - this.speed;
       this.centroTorreY = this.y + this.h / 2;
+    }else if (this.movement["down"] && this.movement["right"]) {
+      this.x = this.x + this.speed;
+      this.centroTorreX = this.x + this.w / 2;
+      this.directionR = true;
+      this.y = this.y + this.speed;
+      this.centroTorreY = this.y + this.h / 2;
+    } else if (this.movement["down"] && this.movement["left"]) {
+      this.x = this.x - this.speed;
+      this.centroTorreX = this.x + this.w / 2;
+      this.directionR = false;
+      this.y = this.y + this.speed;
+      this.centroTorreY = this.y + this.h / 2;
+    } else if (this.movement["up"]) {
+      this.y = this.y - this.speed;
+      this.centroTorreY = this.y + this.h / 2;
+      this.directionR = true;
+    } else if (this.movement["down"]) {
+      this.y = this.y + this.speed;
+      this.centroTorreY = this.y + this.h / 2;
+      this.directionR = false;
+    } else if (this.movement["left"]) {
+      this.x = this.x - this.speed;
+      this.centroTorreX = this.x + this.w / 2;
+      this.directionR = false;
+    } else if (this.movement["right"]) {
+      this.x = this.x + this.speed;
+      this.centroTorreX = this.x + this.w / 2;
+      this.directionR = true;
+      //console.log("terroCenter", this.x, this.y)
     }
-    //console.log("terroCenter", this.x, this.y)
   };
 }

@@ -197,7 +197,7 @@ class Game {
     this.colisionDisparoEnemy();
     this.colisionEnemyTorre();
     this.colisionDisparoPowerUp()
-
+    this.torre.moveTorre()
     //3 dibujado de los elementos
     this.drawFondo();
     this.torre.drawTorre();
