@@ -4,11 +4,11 @@ class Enemy {
 
     //imagen
     this.img1 = new Image();
-    this.img1.src = "../images/enemy1.png";
+    this.img1.src = "./images/enemy1.png";
     this.img2 = new Image();
-    this.img2.src = "../images/enemy2.png";
+    this.img2.src = "./images/enemy2.png";
     this.img3 = new Image();
-    this.img3.src = "../images/enemy3.png";
+    this.img3.src = "./images/enemy3.png";
     this.imgArray = [this.img1, this.img2, this.img3];
     this.imgControl = 1;
     //tamaño
