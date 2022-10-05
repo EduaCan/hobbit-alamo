@@ -1,6 +1,6 @@
 class Enemy {
   constructor(destinoX, destinoY, difficulty) {
-    //todas las propiedades de los enemigos
+    //todas las propiedades de los enemigos, a ver si ahora
 
     //imagen
     this.img1 = new Image();
