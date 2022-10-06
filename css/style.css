@@ -102,6 +102,19 @@ button {
     padding-top: 2vh;
 }
 
+#torches-div {
+    display:flex;
+    justify-content: space-between;
+}
+
+#torches-div img {
+    max-width: 25vw;
+    max-height: 25vh;
+    padding: 0 5vw;
+    background-image: url(../images/glow-png.png);
+    background-size: cover;
+}
+
 #gameover-btn-div {
     display: flex;
     justify-content: center;
@@ -164,6 +177,7 @@ h3 {
     font-family: 'MedievalSharp', cursive;
     padding-bottom: 0;
     margin-bottom: 0;
+    padding-right: 1.5vw;
 }
 
 #score-ul-div div {
@@ -184,7 +198,11 @@ h3 {
 }
 
 #score-name-ul {
-    margin-left: 2vw;
+    margin-left: 0vw;
+}
+
+#score-name-ul li {
+    text-align: left;
 }
 
 #score-number-ul {
@@ -192,9 +210,12 @@ h3 {
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1100px) {
     body {
         font-size: 14px;
+    }
+    #score-name-ul {
+        margin-left: -1vw;
     }
 }
 
@@ -202,7 +223,7 @@ h3 {
     #score-name-ul li, #score-number-ul li {
         font-size: 8px;
     }
-    #score-name-ul li {
-        overflow: hidden;
+    #score-name-ul {
+        margin-left: -1vw;
     }
 }

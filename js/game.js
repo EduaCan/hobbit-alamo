@@ -251,7 +251,6 @@ class Game {
 
     //3 dibujado de los elementos
     this.drawFondo();
-    this.torre.drawHobbits(this.frames, this.torre.direction);
     this.enemyArray.forEach((eachEnemy) => {
       eachEnemy.drawEnemy(this.frames);
     });
@@ -269,6 +268,7 @@ class Game {
       }
     });
     this.torre.drawTorre();
+    this.torre.drawHobbits(this.frames, this.torre.direction);
     this.stayingAlive();
     this.printScore();
     //this.disparo.drawDisparo()

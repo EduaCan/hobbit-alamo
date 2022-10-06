@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="shortcut icon" href="./images/disparo.png">
+    <link rel="shortcut icon" href="./images/disparo.png" />
     <title>The Alamo of the Hobbits</title>
   </head>
   <body>
@@ -18,7 +18,7 @@
             <p id="context-p">
               In an alternate meta-universe, the hobbits take refuge in
               Isengard, subdue the white wizard Saruman, and defend themselves
-              against the orcs with mage's staff.
+              against the orcs with the mage's staff.
               <b>This is the Alamo of the Hobbits.</b>
             </p>
           </div>
@@ -32,15 +32,24 @@
               <li><b>Instructions</b></li>
               <li>Squeeze Saruman's staff with <b>left mouse button</b>.</li>
               <li>Tower can be pushed by Hobbits with <b>WASD keys</b>.</li>
-              <li>Shoot mushrooms for <b>Extra Lifes</b></li>
-              <li>Let hobbits smell orc poo the get a point :)</li>
+              <li>Shoot mushrooms for <b>Extra Lifes</b>.</li>
+              <li>Let hobbits smell orc <b>poo</b> to get a point. :)</li>
             </ul>
           </div>
         </div>
-        <div id="start-btn-div">
-          <input id="name-input" type="text" placeholder="Your name here" maxlength="14"/>
-          <button id="start-btn">Start</button>
-          <span id="loading-span">Loading...</span>
+        <div id="torches-div">
+          <img src="./images/torch.gif" alt="torch" />
+          <div id="start-btn-div">
+            <input
+              id="name-input"
+              type="text"
+              placeholder="Your name here"
+              maxlength="14"
+            />
+            <button id="start-btn">Start</button>
+            <span id="loading-span">Loading...</span>
+          </div>
+          <img src="./images/torch.gif" alt="torch" />
         </div>
         <audio id="splash-music" preload="auto" loop="loop" autoplay="autoplay">
           <source
@@ -75,9 +84,9 @@
         <div id="gameover-btn-div">
           <button id="replay-btn">Replay</button>
           <div id="score-ul-div">
-            <h3>TOP TEN  </h3>
+            <h3>TOP TEN</h3>
             <div>
-              <ul class="score-ul" id="score-name-ul"></ul>
+              <ol class="score-ul" id="score-name-ul"></ol>
               <ul class="score-ul" id="score-number-ul"></ul>
             </div>
           </div>
