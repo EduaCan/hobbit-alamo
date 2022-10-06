@@ -35,6 +35,7 @@ class Enemy {
     this.composedSpeedY = this.speed * this.sin; //vector y
     //cadaver
     this.isCadaver = false
+    this.frames = 0
   }
 
   //dibujado
@@ -60,11 +61,12 @@ class Enemy {
     this.y = this.y + this.composedSpeedY;
   };
 
-  setCadaver = () => {
+  setCadaver = (frames) => {
     this.imgArray = [this.imgCadaver, this.imgCadaver, this.imgCadaver]
     this.speed = 0
     this.composedSpeedX = 0
     this.composedSpeedY = 0
     this.isCadaver = true
+    this.frames = frames
   }
 }

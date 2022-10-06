@@ -136,12 +136,8 @@ class Game {
             );
             this.powerUpArray.push(newPowerUp);
           }
-          this.enemyArray[deadEnemy].setCadaver();
+          this.enemyArray[deadEnemy].setCadaver(this.frames);
           this.cadaverArray.push(this.enemyArray[deadEnemy]);
-          setTimeout(() => {
-            //eliminar la caca en 5 seg
-            this.cadaverArray.shift();
-          }, 5000);
           this.enemyArray.splice(deadEnemy, 1);
           this.disparoArray.splice(deadDisaparo, 1);
           this.getScore(true);
@@ -256,6 +252,9 @@ class Game {
     });
     this.cadaverArray.forEach((eachCadaver) => {
       eachCadaver.drawEnemy(this.frames);
+      if (this.frames - eachCadaver.frames >= 300) {
+        this.cadaverArray.shift();
+      }
     });
     this.disparoArray.forEach((eachDisparo) => {
       eachDisparo.drawDisparo();
