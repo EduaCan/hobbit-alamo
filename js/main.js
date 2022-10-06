@@ -14,6 +14,7 @@ const scoreNumberUl = document.querySelector("#score-number-ul");
 // SOUNDS
 const splashMusic = document.querySelector("#splash-music");
 const battleAudio = document.querySelector("#battle-audio");
+const gameOverMusic = document.querySelector("#gameover-music")
 
 let booleanEngine = true;
 let intervalID;
@@ -31,6 +32,9 @@ let gameObj;
 const saveLocalStorage = () => {
   //localStorage.clear()
   localStorage.setItem(nameInput.value, gameObj.score * 10);
+  if (nameInput.value === "6969A6969"){
+    localStorage.clear()
+  }
 };
 
 const showRanking = () => {
@@ -81,6 +85,8 @@ const engineSelector = () => {
 };
 
 const goHome = () => {
+  gameOverMusic.pause()
+  splashMusic.play()
   gameOverScreen.style.display = "none";
   startScreen.style.display = "flex";
   canvas.style.display = "none";
@@ -90,6 +96,7 @@ const goHome = () => {
 const startGame = () => {
   //ocultar splash screen
   //ocultar game-over screen
+  gameOverMusic.pause()
   splashMusic.pause();
   battleAudio.play();
   startScreen.style.display = "none";
@@ -114,6 +121,7 @@ const startGame = () => {
 const restartGame = () => {
   //ocultar splash screen
   //ocultar gameover-screen
+  gameOverMusic.pause()
   splashMusic.pause();
   battleAudio.play();
   gameOverScreen.style.display = "none";
@@ -137,6 +145,7 @@ const restartGame = () => {
 const gameOver = () => {
   saveLocalStorage();
   battleAudio.pause();
+  gameOverMusic.play()
   gameOverScreen.style.display = "block";
   gameScreen.style.display = "none";
   startScreen.style.display = "none";
@@ -177,7 +186,7 @@ window.addEventListener("load", () => {
   startBtn.style.display = "block";
   nameInput.style.display = "block";
   loadingSpan.style.display = "none";
-  //! splashMusic.play()  // lo quito para no volverme loco
+  splashMusic.play()  // quitalo para no volverme loco
 });
 
 //click disparo

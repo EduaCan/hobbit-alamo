@@ -22,9 +22,17 @@ class Torre {
     this.img3L = new Image();
     this.img3L.src = "./images/hobbit3l.png";
     this.hobbitImgArrayL = [this.img1L, this.img2L, this.img3L];
+    //up
+    this.img1U = new Image();
+    this.img1U.src = "./images/hobbit1u.png";
+    this.img2U = new Image();
+    this.img2U.src = "./images/hobbit2u.png";
+    this.img3U = new Image();
+    this.img3U.src = "./images/hobbit3u.png";
+    this.hobbitImgArrayU = [this.img1U, this.img2U, this.img3U];
     //imageControl
     this.imgControl = 0;
-    this.directionR = true; //para que los hobbits empujen por el lado correcto
+    this.direction = "right"; //para que los hobbits empujen por el lado correcto
     //tamaño
     this.w = 35;
     this.h = 70;
@@ -48,8 +56,8 @@ class Torre {
     ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   };
 
-  drawHobbits = (frames, directionR) => {
-    if (directionR === true) {
+  drawHobbits = (frames, direction) => {
+    if (direction === "right") {
       if (frames % 10 === 0) {
         this.imgControl++;
       }
@@ -63,7 +71,21 @@ class Torre {
         20,
         15
       );
-    } else {
+    } else if (direction === "up") {
+      if (frames % 10 === 0) {
+        this.imgControl++;
+      }
+      if (this.imgControl >= 3) {
+        this.imgControl = 0;
+      }
+      ctx.drawImage(
+        this.hobbitImgArrayU[this.imgControl],
+        this.x + 7,
+        this.y + 60,
+        20,
+        15
+      );
+    } else if (direction === "left") {
       if (frames % 10 === 0) {
         this.imgControl++;
       }
@@ -72,65 +94,67 @@ class Torre {
       }
       ctx.drawImage(
         this.hobbitImgArrayL[this.imgControl],
-        this.x + this.w - 10,
+        this.x + this.w - 6,
         this.y + 55,
         20,
         15
       );
-    }
+    } 
   };
 
   moveUp = () => {
     if (this.y > 0) {
       this.y = this.y - this.speed;
       this.centroTorreY = this.y + this.h / 2;
+      this.direction = "up";
     }
-  }
+  };
 
   moveDown = () => {
     if (this.y + this.h < canvas.height) {
       this.y = this.y + this.speed;
       this.centroTorreY = this.y + this.h / 2;
+      this.direction = "down";
     }
-  }
+  };
 
   moveRight = () => {
     if (this.x + this.w < canvas.width) {
       this.x = this.x + this.speed;
       this.centroTorreX = this.x + this.w / 2;
-      this.directionR = true;
+      this.direction = "right";
     }
-  }
+  };
 
   moveLeft = () => {
     if (this.x > 0) {
       this.x = this.x - this.speed;
       this.centroTorreX = this.x + this.w / 2;
-      this.directionR = false;
+      this.direction = "left";
     }
-  }
+  };
 
   moveTorre = () => {
     if (this.movement["up"] && this.movement["right"]) {
-      this.moveUp()
-      this.moveRight()
-    } else if(this.movement["up"] && this.movement["left"]) {
-      this.moveUp()
-      this.moveLeft()
-    }else if (this.movement["down"] && this.movement["right"]) {
-     this.moveDown()
-     this.moveRight()
+      this.moveUp();
+      this.moveRight();
+    } else if (this.movement["up"] && this.movement["left"]) {
+      this.moveUp();
+      this.moveLeft();
+    } else if (this.movement["down"] && this.movement["right"]) {
+      this.moveDown();
+      this.moveRight();
     } else if (this.movement["down"] && this.movement["left"]) {
-      this.moveDown()
-      this.moveLeft()
+      this.moveDown();
+      this.moveLeft();
     } else if (this.movement["up"]) {
-      this.moveUp()
+      this.moveUp();
     } else if (this.movement["down"]) {
-      this.moveDown()
+      this.moveDown();
     } else if (this.movement["left"]) {
-      this.moveLeft()
+      this.moveLeft();
     } else if (this.movement["right"]) {
-      this.moveRight()
+      this.moveRight();
       //console.log("terroCenter", this.x, this.y)
     }
   };
