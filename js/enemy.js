@@ -11,6 +11,8 @@ class Enemy {
     this.img3.src = "./images/enemy3.png";
     this.imgArray = [this.img1, this.img2, this.img3];
     this.imgControl = 1;
+    this.imgCadaver = new Image();
+    this.imgCadaver.src = "./images/cadaver.png"
     //tamaño
     this.w = 15;
     this.h = 20;
@@ -31,7 +33,8 @@ class Enemy {
 
     this.composedSpeedX = this.speed * this.cos; //vector x
     this.composedSpeedY = this.speed * this.sin; //vector y
-    //sonidos
+    //cadaver
+    this.isCadaver = false
   }
 
   //dibujado
@@ -56,4 +59,12 @@ class Enemy {
     this.x = this.x + this.composedSpeedX;
     this.y = this.y + this.composedSpeedY;
   };
+
+  setCadaver = () => {
+    this.imgArray = [this.imgCadaver, this.imgCadaver, this.imgCadaver]
+    this.speed = 0
+    this.composedSpeedX = 0
+    this.composedSpeedY = 0
+    this.isCadaver = true
+  }
 }

@@ -9,6 +9,7 @@ class Game {
     //enemigos
     //this.enemy = new Enemy();
     this.enemyArray = [];
+    this.cadaverArray = []; //! acuerdate de quitarlo
     //fondo
     this.fondo = new Image();
     this.fondo.src = "./images/background.png";
@@ -23,17 +24,24 @@ class Game {
     //gameOver
     this.isGameOn = true;
     this.lifes = 3;
-    this.heartArray = ["❤️", "❤️", "❤️"]
+    this.heartArray = ["❤️", "❤️", "❤️"];
     //powerUps
-    this.powerUpArray = []
+    this.powerUpArray = [];
     //sonidos
-    this.losingAudio = new Audio("./sounds/mixkit-trombone-disappoint-744.wav")
-    this.shootAudio = new Audio("./sounds/mixkit-funny-squeaky-toy-hits-2813.wav")
-    this.orcLaught = new Audio("./sounds/mixkit-creepy-little-creature-2873.mp3")
-    this.orcDeath = new Audio("./sounds/mixkit-cartoon-fart-or-splat-3056.mp3")
-    this.movingTorre = new Audio("./sounds/mixkit-falling-into-mud-surface-385.wav")
+    this.losingAudio = new Audio("./sounds/mixkit-trombone-disappoint-744.wav");
+    this.shootAudio = new Audio(
+      "./sounds/mixkit-funny-squeaky-toy-hits-2813.wav"
+    );
+    this.orcLaught = new Audio(
+      "./sounds/mixkit-creepy-little-creature-2873.mp3"
+    );
+    this.orcDeath = new Audio("./sounds/mixkit-cartoon-fart-or-splat-3056.mp3");
+    this.movingTorre = new Audio(
+      "./sounds/mixkit-falling-into-mud-surface-385.wav"
+    );
     this.movingTorre.volume = 0.1;
-    this.getPowerUp = new Audio("./sounds/mixkit-drum-joke-accent-579.wav")
+    this.getPowerUp = new Audio("./sounds/mixkit-drum-joke-accent-579.wav");
+    this.getShitSound = new Audio("./sounds/mixkit-hard-pop-click-2364.wav");
   }
 
   //todos los metodos y acciones del juego
@@ -54,17 +62,19 @@ class Game {
   //colision enemigos con torre
   colisionEnemyTorre = () => {
     this.enemyArray.forEach((eachEnemy) => {
+      //con enemigos vivos, aún
       if (
         eachEnemy.x < this.torre.x + this.torre.w &&
         eachEnemy.x + eachEnemy.w > this.torre.x &&
         eachEnemy.y < this.torre.y + this.torre.h &&
-        eachEnemy.h + eachEnemy.y > this.torre.y
+        eachEnemy.h + eachEnemy.y > this.torre.y &&
+        !eachEnemy.isCadaver
       ) {
         let deadEnemy = this.enemyArray.indexOf(eachEnemy);
         this.enemyArray.splice(deadEnemy, 1);
         this.lifes--;
-        this.heartArray.pop()
-        this.orcLaught.cloneNode(true).play()
+        this.heartArray.pop();
+        this.orcLaught.cloneNode(true).play();
         if (this.lifes === 0) {
           this.gameOver();
         }
@@ -73,12 +83,34 @@ class Game {
     });
   };
 
+  colisionCadaverTorre = () => {
+    this.cadaverArray.forEach((eachCadaver) => {
+      if (
+        eachCadaver.x < this.torre.x + this.torre.w && //con cadaveres
+        eachCadaver.x + eachCadaver.w > this.torre.x &&
+        eachCadaver.y < this.torre.y + this.torre.h &&
+        eachCadaver.h + eachCadaver.y > this.torre.y
+      ) {
+        let stepShit = this.cadaverArray.indexOf(eachCadaver);
+        this.cadaverArray.splice(stepShit, 1);
+        this.getShitSound.cloneNode(true).play();
+        this.getScore(eachCadaver.isCadaver);
+        //console.log("shiiiiit!")
+      }
+    });
+  };
+
   //crear disparos
   disparar = (destinoX, destinoY) => {
-    let nuevoDisparo = new Disparo(destinoX, destinoY, this.torre.centroTorreX, this.torre.centroTorreY);
+    let nuevoDisparo = new Disparo(
+      destinoX,
+      destinoY,
+      this.torre.centroTorreX,
+      this.torre.centroTorreY
+    );
     this.disparoArray.push(nuevoDisparo);
-    if (canvas.style.display === "block" ) {
-      this.shootAudio.cloneNode(true).play()
+    if (canvas.style.display === "block") {
+      this.shootAudio.cloneNode(true).play();
     }
     //console.log("centroTorre", this.torre.centroTorreX, this.torre.centroTorreY)
   };
@@ -91,21 +123,31 @@ class Game {
           eachEnemy.x < eachDisparo.x + eachDisparo.w &&
           eachEnemy.x + eachEnemy.w > eachDisparo.x &&
           eachEnemy.y < eachDisparo.y + eachDisparo.h &&
-          eachEnemy.h + eachEnemy.y > eachDisparo.y
+          eachEnemy.h + eachEnemy.y > eachDisparo.y &&
+          !eachEnemy.isCadaver
         ) {
           let deadEnemy = this.enemyArray.indexOf(eachEnemy);
           let deadDisaparo = this.disparoArray.indexOf(eachDisparo);
           if (Math.floor(Math.random() * (5 + this.level)) === 0) {
-            let newPowerUp = new PowerUp(this.enemyArray[deadEnemy].x, this.enemyArray[deadEnemy].y, this.frames)
-            this.powerUpArray.push(newPowerUp)
+            let newPowerUp = new PowerUp(
+              this.enemyArray[deadEnemy].x,
+              this.enemyArray[deadEnemy].y,
+              this.frames
+            );
+            this.powerUpArray.push(newPowerUp);
           }
+          this.enemyArray[deadEnemy].setCadaver();
+          this.cadaverArray.push(this.enemyArray[deadEnemy]);
+          setTimeout(() => {
+            //eliminar la caca en 5 seg
+            this.cadaverArray.shift();
+          }, 5000);
           this.enemyArray.splice(deadEnemy, 1);
           this.disparoArray.splice(deadDisaparo, 1);
-          this.getScore();
+          this.getScore(true);
           this.getLevel();
           //console.log("score", this.score, "level", this.level);
-          this.orcDeath.cloneNode(true).play()
-
+          this.orcDeath.cloneNode(true).play();
         }
       });
     });
@@ -125,24 +167,23 @@ class Game {
           let deadDisparo = this.disparoArray.indexOf(eachDisparo);
           this.powerUpArray.splice(deadPowerUp, 1);
           this.disparoArray.splice(deadDisparo, 1);
-          this.getALife()
+          this.getALife();
           //console.log("score", this.score, "level", this.level);
-          this.getPowerUp.cloneNode(true).play()
-
+          this.getPowerUp.cloneNode(true).play();
         }
       });
     });
-  }
+  };
 
   //ganas vida con powerUp
   getALife = () => {
-    if (Math.floor(Math.random() * 6) === 0){
-      this.heartArray.push("💩")
+    if (Math.floor(Math.random() * 6) === 0) {
+      this.heartArray.push("💩");
     } else {
-      this.heartArray.push("❤️")
+      this.heartArray.push("❤️");
     }
-    this.lifes = this.lifes + 1
-  }
+    this.lifes = this.lifes + 1;
+  };
 
   //fin del juego
   gameOver = () => {
@@ -150,31 +191,39 @@ class Game {
   };
 
   //puntuación
-  getScore = () => {
-    this.score = this.score + 1;
+  getScore = (isCadaver) => {
+    if (isCadaver) {
+      this.score = this.score + 1;
+    } else {
+      this.score = this.score + 0.1;
+    }
   };
 
   printScore = () => {
-    ctx.font = '20px serif';
-    ctx.fillText(`Score ${this.score * 10}`, canvas.width - 100, 20);
-  }
+    ctx.font = "20px serif";
+    ctx.fillText(
+      `Score ${Math.floor(this.score * 10)}`,
+      canvas.width - 100,
+      20
+    );
+  };
 
   //niveles
   getLevel = () => {
     if (this.score < 10) {
-        this.level = 1
-    }else{
-        if (this.score % 10 === 0) {
-          this.level = this.score / 10;
-        }
+      this.level = 1;
+    } else {
+      if (this.score % 10 === 0) {
+        this.level = Math.floor(this.score / 10);
+      }
     }
   };
 
   //vidas
   stayingAlive = () => {
-    ctx.font = '20px serif';
+    ctx.font = "20px serif";
     ctx.fillText(`${this.heartArray}`, 10, 20);
-  }
+  };
 
   //gameLoop
   gameLoop = () => {
@@ -196,33 +245,37 @@ class Game {
     });
     this.colisionDisparoEnemy();
     this.colisionEnemyTorre();
-    this.colisionDisparoPowerUp()
-    this.torre.moveTorre()
-    
+    this.colisionDisparoPowerUp();
+    this.colisionCadaverTorre()
+    this.torre.moveTorre();
+
     //3 dibujado de los elementos
     this.drawFondo();
-    this.torre.drawTorre();
-    this.torre.drawHobbits(this.frames, this.torre.direction)
+    this.torre.drawHobbits(this.frames, this.torre.direction);
     this.enemyArray.forEach((eachEnemy) => {
       eachEnemy.drawEnemy(this.frames);
+    });
+    this.cadaverArray.forEach((eachCadaver) => {
+      eachCadaver.drawEnemy(this.frames);
     });
     this.disparoArray.forEach((eachDisparo) => {
       eachDisparo.drawDisparo();
     });
-    this.powerUpArray.forEach( (eachPowerUp) => {
-      eachPowerUp.drawPowerUp()
+    this.powerUpArray.forEach((eachPowerUp) => {
+      eachPowerUp.drawPowerUp();
       //let indexPowerUp = this.powerUpArray.indexOf(eachPowerUp)
       if (this.frames - eachPowerUp.initialFrame >= 300) {
-        this.powerUpArray.shift()
+        this.powerUpArray.shift();
       }
-    })
-    this.stayingAlive()
-    this.printScore()
+    });
+    this.torre.drawTorre();
+    this.stayingAlive();
+    this.printScore();
     //this.disparo.drawDisparo()
 
     //4 control de recursion
     if (this.isGameOn === true) {
-        requestAnimationFrame(this.gameLoop);
+      requestAnimationFrame(this.gameLoop);
     }
   };
 }

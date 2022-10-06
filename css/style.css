@@ -1,11 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=MedievalSharp&display=swap');
 
 
-@media screen and (max-width: 1000px) {
-    body {
-        font-size: 14px;
-    }
-}
+
 
 
 
@@ -64,7 +60,7 @@ h1 {
 
 
 #start-btn-div {
-    margin-top: 7vh;
+    margin-top: 1vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -193,4 +189,20 @@ h3 {
 
 #score-number-ul {
     margin-right: 3vw;
+}
+
+
+@media screen and (max-width: 900px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+@media scree and (max-height: 700px) {
+    #score-name-ul li, #score-number-ul li {
+        font-size: 8px;
+    }
+    #score-name-ul li {
+        overflow: hidden;
+    }
 }

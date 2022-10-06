@@ -17,7 +17,8 @@ const battleAudio = document.querySelector("#battle-audio");
 const gameOverMusic = document.querySelector("#gameover-music")
 
 let booleanEngine = true;
-let intervalID;
+let intervalIDgameover;
+let intervalIDgameoverScreen;
 
 //buttons
 const startBtn = document.querySelector("#start-btn");
@@ -31,7 +32,7 @@ let gameObj;
 
 const saveLocalStorage = () => {
   //localStorage.clear()
-  localStorage.setItem(nameInput.value, gameObj.score * 10);
+  localStorage.setItem(nameInput.value, Math.floor(gameObj.score * 10));
   if (nameInput.value === "6969A6969"){
     localStorage.clear()
   }
@@ -55,7 +56,7 @@ const showRanking = () => {
       return 0;
     }
   });
-  console.log(rankingArr);
+  //console.log(rankingArr);
   //rankingArr.splice(rankingArr.indexOf("loglevel"), 1)
   //console.log("aftersdplice", rankingArr);
   for (let iteration = 0; iteration < rankingArr.length; iteration++) {
@@ -109,10 +110,10 @@ const startGame = () => {
   //iniciar el juego, metodo gameLoop()
   gameObj.gameLoop();
   //si hace falta, setTimeOut() o setInterval
-  let intervalID = setInterval(() => {
+  let intervalIDgameover = setInterval(() => {
     if (gameObj.isGameOn === false) {
       gameOver();
-      clearInterval(intervalID);
+      clearInterval(intervalIDgameover);
       gameObj.losingAudio.cloneNode(true).play();
     }
   }, 2000);
@@ -134,10 +135,10 @@ const restartGame = () => {
   //iniciar el juego, metodo gameLoop()
   gameObj.gameLoop();
   //si hace falta, setTimeOut() o setInterval
-  let intervalID = setInterval(() => {
+  let intervalIDgameover = setInterval(() => {
     if (gameObj.isGameOn === false) {
       gameOver();
-      clearInterval(intervalID);
+      clearInterval(intervalIDgameover);
     }
   }, 2000);
 };
@@ -145,12 +146,15 @@ const restartGame = () => {
 const gameOver = () => {
   saveLocalStorage();
   battleAudio.pause();
-  gameOverMusic.play()
+  intervalIDgameoverScreen = setInterval(() => {
+    gameOverMusic.play()
+    clearInterval(intervalIDgameoverScreen)
+  },2000)
   gameOverScreen.style.display = "block";
   gameScreen.style.display = "none";
   startScreen.style.display = "none";
   canvas.style.display = "none";
-  scoreSpan.innerText = gameObj.score * 10;
+  scoreSpan.innerText = Math.floor(gameObj.score * 10);
   showRanking();
   //engineSelector()
 };
@@ -186,7 +190,7 @@ window.addEventListener("load", () => {
   startBtn.style.display = "block";
   nameInput.style.display = "block";
   loadingSpan.style.display = "none";
-  splashMusic.play()  // quitalo para no volverme loco
+  goHome()
 });
 
 //click disparo
