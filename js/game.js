@@ -94,7 +94,7 @@ class Game {
         let stepShit = this.cadaverArray.indexOf(eachCadaver);
         this.cadaverArray.splice(stepShit, 1);
         this.getShitSound.cloneNode(true).play();
-        this.getScore(eachCadaver.isCadaver);
+        this.getScore(!eachCadaver.isCadaver);
         //console.log("shiiiiit!")
       }
     });
@@ -209,8 +209,9 @@ class Game {
     if (this.score < 10) {
       this.level = 1;
     } else {
-      if (this.score % 10 === 0) {
+      if (Math.floor(this.score) % 10 === 0) {
         this.level = Math.floor(this.score / 10);
+        console.log("level", this.level)
       }
     }
   };
