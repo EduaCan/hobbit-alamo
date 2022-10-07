@@ -61,6 +61,7 @@ class Enemy {
     this.y = this.y + this.composedSpeedY;
   };
 
+  //marcar los enemigos como muertos
   setCadaver = (frames) => {
     this.imgArray = [this.imgCadaver, this.imgCadaver, this.imgCadaver]
     this.speed = 0

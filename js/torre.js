@@ -41,7 +41,7 @@ class Torre {
     //posicion
 
     this.x = canvas.width / 2 - this.w / 2;
-    this.y = canvas.height - this.h - 50; //canvas.height / 2 - this.h / 2;
+    this.y = canvas.height - this.h - 50;
 
     this.centroTorreX = this.x + this.w / 2;
     this.centroTorreY = this.y + this.h / 2;
@@ -52,10 +52,12 @@ class Torre {
 
   //metodos y acciones de la torre
 
+  //dibujado de la torre
   drawTorre = () => {
     ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   };
 
+  //animacion de los hobbits
   drawHobbits = (frames, direction) => {
     if (direction === "right") {
       if (frames % 10 === 0) {
@@ -102,6 +104,7 @@ class Torre {
     } 
   };
 
+  //movimiento arriba
   moveUp = () => {
     if (this.y > 0) {
       this.y = this.y - this.speed;
@@ -110,6 +113,7 @@ class Torre {
     }
   };
 
+  //movimiento abajo
   moveDown = () => {
     if (this.y + this.h < canvas.height) {
       this.y = this.y + this.speed;
@@ -118,6 +122,7 @@ class Torre {
     }
   };
 
+  //movimiento derecha
   moveRight = () => {
     if (this.x + this.w < canvas.width) {
       this.x = this.x + this.speed;
@@ -126,6 +131,7 @@ class Torre {
     }
   };
 
+  //movimiento izquierda
   moveLeft = () => {
     if (this.x > 0) {
       this.x = this.x - this.speed;
@@ -134,6 +140,7 @@ class Torre {
     }
   };
 
+  //gestion de todos los movimientos
   moveTorre = () => {
     if (this.movement["up"] && this.movement["right"]) {
       this.moveUp();
@@ -155,7 +162,6 @@ class Torre {
       this.moveLeft();
     } else if (this.movement["right"]) {
       this.moveRight();
-      //console.log("terroCenter", this.x, this.y)
     }
   };
 }

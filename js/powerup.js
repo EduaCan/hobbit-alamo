@@ -9,6 +9,7 @@ class PowerUp {
         this.initialFrame = frames
     }
 
+    //dibujado de las setitas
     drawPowerUp = () => {
         ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
       };

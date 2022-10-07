@@ -11,10 +11,16 @@ const nameInput = document.querySelector("#name-input");
 const scoreNameUl = document.querySelector("#score-name-ul");
 const scoreNumberUl = document.querySelector("#score-number-ul");
 
+
 // SOUNDS
 const splashMusic = document.querySelector("#splash-music");
 const battleAudio = document.querySelector("#battle-audio");
 const gameOverMusic = document.querySelector("#gameover-music")
+
+splashMusic.volume = 0.01;
+battleAudio.volume = 0.01;
+gameOverMusic.volume = 0.01;
+
 
 let booleanEngine = true;
 let intervalIDgameover;
@@ -30,14 +36,16 @@ let gameObj;
 
 // STATE MANAGEMENT FUNCTIONS
 
-const saveLocalStorage = () => {
-  //localStorage.clear()
+//va guardando el nombre y puntuacion,
+// o lo borra introduciendo un nombre concreto
+const saveLocalStorage = () => { 
   localStorage.setItem(nameInput.value, Math.floor(gameObj.score * 10));
   if (nameInput.value === "6969A6969"){
     localStorage.clear()
   }
 };
 
+//ordena la lista de partidas por puentuacion y lo muestra en el DOM
 const showRanking = () => {
   let rankingArr = [];
   scoreNameUl.innerHTML = "";
@@ -46,7 +54,7 @@ const showRanking = () => {
   for (let item in localStorage) {
     rankingArr.push([item, localStorage[item]]);
   }
-  rankingArr.splice(-6); //quito las mierdas que vienen por defecto
+  rankingArr.splice(-6); //quito las propiedades que vienen por defecto
   rankingArr.sort((elem2, elem1) => {
     if (Number(elem2[1]) > Number(elem1[1])) {
       return -1;
@@ -56,9 +64,6 @@ const showRanking = () => {
       return 0;
     }
   });
-  //console.log(rankingArr);
-  //rankingArr.splice(rankingArr.indexOf("loglevel"), 1)
-  //console.log("aftersdplice", rankingArr);
   for (let iteration = 0; iteration < rankingArr.length; iteration++) {
     if (rankingArr[iteration][0] !== "loglevel") {
       if (rankingArr[iteration][0] === "") {
@@ -75,6 +80,7 @@ const showRanking = () => {
   }
 };
 
+//para alternar las dos funciones que inician el juego
 const engineSelector = () => {
   if (booleanEngine === true) {
     booleanEngine = false;
@@ -85,6 +91,7 @@ const engineSelector = () => {
   }
 };
 
+//va a splash screen
 const goHome = () => {
   gameOverMusic.pause()
   splashMusic.play()
@@ -94,11 +101,13 @@ const goHome = () => {
   gameScreen.style.display = "none";
 };
 
+//va a la pantalla del juego
 const startGame = () => {
   //ocultar splash screen
   //ocultar game-over screen
   gameOverMusic.pause()
   splashMusic.pause();
+  
   battleAudio.play();
   startScreen.style.display = "none";
   gameOverScreen.style.display = "none";
@@ -114,11 +123,14 @@ const startGame = () => {
     if (gameObj.isGameOn === false) {
       gameOver();
       clearInterval(intervalIDgameover);
-      gameObj.losingAudio.cloneNode(true).play();
+      let losingAudioClone = gameObj.losingAudio.cloneNode(true)
+      losingAudioClone.volume = 0.01
+      losingAudioClone.play()
     }
-  }, 2000);
+  }, 2300);
 };
 
+//va a la pantalla del juego
 const restartGame = () => {
   //ocultar splash screen
   //ocultar gameover-screen
@@ -143,6 +155,7 @@ const restartGame = () => {
   }, 2000);
 };
 
+//va a la pantalla gameover
 const gameOver = () => {
   saveLocalStorage();
   battleAudio.pause();
@@ -156,16 +169,13 @@ const gameOver = () => {
   canvas.style.display = "none";
   scoreSpan.innerText = Math.floor(gameObj.score * 10);
   showRanking();
-  //engineSelector()
 };
 
+//pasa los paramentros del event a la funcion de disparo
 disparar = (event) => {
   if (event.button === 0) {
-    //console.log("click del mouse", gameObj);
     gameObj.disparar(event.offsetX, event.offsetY, gameObj.torre.cen);
-    //console.log("local storage", localStorage, "name",localStorage.getItem(nameInput.value))  //! prueba
   }
-  //console.log(event.offsetX, event.offsetY)
 };
 
 // ADD EVENT LISTENERS
@@ -185,7 +195,6 @@ nameInput.addEventListener("keydown", (event) => {
 
 //loading
 window.addEventListener("load", () => {
-  //console.log("loaded");
   gameObj = new Game();
   startBtn.style.display = "block";
   nameInput.style.display = "block";
@@ -200,39 +209,23 @@ window.addEventListener("mousedown", disparar);
 window.addEventListener("keydown", (event) => {
   if (event.code === "KeyW") {
     gameObj.torre.movement["up"] = true;
-    //console.log(gameObj.torre.movement)
-    //gameObj.movingTorre.cloneNode(true).play()
   } else if (event.code === "KeyS") {
-    //gameObj.movingTorre.cloneNode(true).play()
     gameObj.torre.movement["down"] = true;
-    //console.log(gameObj.torre.movement)
   } else if (event.code === "KeyA") {
-    //gameObj.movingTorre.cloneNode(true).play()
     gameObj.torre.movement["left"] = true;
-    //console.log(gameObj.torre.movement)
   } else if (event.code === "KeyD") {
     gameObj.torre.movement["right"] = true;
-    //console.log(gameObj.torre.movement)
-    //gameObj.movingTorre.cloneNode(true).play()
   }
 });
 
 window.addEventListener("keyup", (event) => {
   if (event.code === "KeyW") {
     gameObj.torre.movement["up"] = false;
-    //console.log(gameObj.torre.movement)
-    //gameObj.movingTorre.cloneNode(true).play()
   } else if (event.code === "KeyS") {
-    //gameObj.movingTorre.cloneNode(true).play()
     gameObj.torre.movement["down"] = false;
-    //console.log(gameObj.torre.movement)
   } else if (event.code === "KeyA") {
-    //gameObj.movingTorre.cloneNode(true).play()
     gameObj.torre.movement["left"] = false;
-    //console.log(gameObj.torre.movement)
   } else if (event.code === "KeyD") {
     gameObj.torre.movement["right"] = false;
-    //console.log(gameObj.torre.movement)
-    //gameObj.movingTorre.cloneNode(true).play()
   }
 });
