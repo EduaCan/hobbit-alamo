@@ -1,5 +1,5 @@
 class Disparo {
-    constructor(destinoX, destinoY, origenX, origenY) {
+  constructor(destinoX, destinoY, origenX, origenY) {
     //todas las propiedades de la bola de fuego
 
     //imagen
@@ -18,38 +18,42 @@ class Disparo {
     this.x = origenX;
     this.y = origenY;
     //movimiento
-    this.speed = 10  //velocidad a gusto
+    this.speed = 10; //velocidad a gusto
 
-    this.deltaX = destinoX - this.x //diferencia coordenadas x
-    this.deltaY = destinoY - this.y //diferencia coordenadas x
+    this.deltaX = destinoX - this.x; //diferencia coordenadas x
+    this.deltaY = destinoY - this.y; //diferencia coordenadas x
 
-    this.hippo = Math.sqrt(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2)) //hipotenusa
+    this.hippo = Math.sqrt(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2)); //hipotenusa
 
-    this.sin = this.deltaY / this.hippo //seno     (.) -
-    this.cos = this.deltaX / this.hippo //coseno    - (.)
+    this.sin = this.deltaY / this.hippo; //seno     (.) -
+    this.cos = this.deltaX / this.hippo; //coseno    - (.)
 
-    this.composedSpeedX = this.speed * this.cos   //vector x
-    this.composedSpeedY = this.speed * this.sin   //vector y
+    this.composedSpeedX = this.speed * this.cos; //vector x
+    this.composedSpeedY = this.speed * this.sin; //vector y
+  }
+
+  //metodos y acciones de la bola de fuego
+
+  //dibujado del disparo para cada direccion
+  drawDisparo = () => {
+    if (this.sin >= 0 && this.sin >= Math.abs(this.cos)) {
+      //down
+      ctx.drawImage(this.imgDown, this.x, this.y, this.w, this.h);
+    } else if (this.sin <= 0 && Math.abs(this.sin) >= Math.abs(this.cos)) {
+      //up
+      ctx.drawImage(this.imgUp, this.x, this.y, this.w, this.h);
+    } else if (this.cos >= 0 && this.cos >= Math.abs(this.sin)) {
+      //right
+      ctx.drawImage(this.imgRight, this.x, this.y, this.w, this.h);
+    } else if (this.cos <= 0 && Math.abs(this.cos) >= Math.abs(this.sin)) {
+      //left
+      ctx.drawImage(this.imgLeft, this.x, this.y, this.w, this.h);
     }
+  };
 
-    //metodos y acciones de la bola de fuego
-
-    //dibujado del disparo para cada direccion
-    drawDisparo = () => {
-        if (this.sin >= 0 && this.sin >= Math.abs(this.cos)) { //down 
-            ctx.drawImage(this.imgDown, this.x, this.y, this.w, this.h)
-        }else if (this.sin <= 0 && Math.abs(this.sin) >= Math.abs(this.cos)) { //up
-            ctx.drawImage(this.imgUp, this.x, this.y, this.w, this.h)
-        }else if (this.cos >= 0 && this.cos >= Math.abs(this.sin)) { //right
-            ctx.drawImage(this.imgRight, this.x, this.y, this.w, this.h)
-        }else if (this.cos <= 0 && Math.abs(this.cos) >= Math.abs(this.sin)) { //left
-            ctx.drawImage(this.imgLeft, this.x, this.y, this.w, this.h)
-        }
-    }
-
-    //movimiento del disparo
-    movimientoDisparo = () => {
-        this.x = this.x + this.composedSpeedX
-        this.y = this.y + this.composedSpeedY
-    }
-}   
+  //movimiento del disparo
+  movimientoDisparo = () => {
+    this.x = this.x + this.composedSpeedX;
+    this.y = this.y + this.composedSpeedY;
+  };
+}

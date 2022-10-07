@@ -11,16 +11,14 @@ const nameInput = document.querySelector("#name-input");
 const scoreNameUl = document.querySelector("#score-name-ul");
 const scoreNumberUl = document.querySelector("#score-number-ul");
 
-
 // SOUNDS
 const splashMusic = document.querySelector("#splash-music");
 const battleAudio = document.querySelector("#battle-audio");
-const gameOverMusic = document.querySelector("#gameover-music")
+const gameOverMusic = document.querySelector("#gameover-music");
 
 splashMusic.volume = 0.01;
 battleAudio.volume = 0.01;
 gameOverMusic.volume = 0.01;
-
 
 let booleanEngine = true;
 let intervalIDgameover;
@@ -38,10 +36,10 @@ let gameObj;
 
 //va guardando el nombre y puntuacion,
 // o lo borra introduciendo un nombre concreto
-const saveLocalStorage = () => { 
+const saveLocalStorage = () => {
   localStorage.setItem(nameInput.value, Math.floor(gameObj.score * 10));
-  if (nameInput.value === "6969A6969"){
-    localStorage.clear()
+  if (nameInput.value === "6969A6969") {
+    localStorage.clear();
   }
 };
 
@@ -93,8 +91,8 @@ const engineSelector = () => {
 
 //va a splash screen
 const goHome = () => {
-  gameOverMusic.pause()
-  splashMusic.play()
+  gameOverMusic.pause();
+  splashMusic.play();
   gameOverScreen.style.display = "none";
   startScreen.style.display = "flex";
   canvas.style.display = "none";
@@ -105,9 +103,9 @@ const goHome = () => {
 const startGame = () => {
   //ocultar splash screen
   //ocultar game-over screen
-  gameOverMusic.pause()
+  gameOverMusic.pause();
   splashMusic.pause();
-  
+
   battleAudio.play();
   startScreen.style.display = "none";
   gameOverScreen.style.display = "none";
@@ -123,9 +121,9 @@ const startGame = () => {
     if (gameObj.isGameOn === false) {
       gameOver();
       clearInterval(intervalIDgameover);
-      let losingAudioClone = gameObj.losingAudio.cloneNode(true)
-      losingAudioClone.volume = 0.01
-      losingAudioClone.play()
+      let losingAudioClone = gameObj.losingAudio.cloneNode(true);
+      losingAudioClone.volume = 0.01;
+      losingAudioClone.play();
     }
   }, 2300);
 };
@@ -134,7 +132,7 @@ const startGame = () => {
 const restartGame = () => {
   //ocultar splash screen
   //ocultar gameover-screen
-  gameOverMusic.pause()
+  gameOverMusic.pause();
   splashMusic.pause();
   battleAudio.play();
   gameOverScreen.style.display = "none";
@@ -160,9 +158,9 @@ const gameOver = () => {
   saveLocalStorage();
   battleAudio.pause();
   intervalIDgameoverScreen = setInterval(() => {
-    gameOverMusic.play()
-    clearInterval(intervalIDgameoverScreen)
-  },2000)
+    gameOverMusic.play();
+    clearInterval(intervalIDgameoverScreen);
+  }, 2000);
   gameOverScreen.style.display = "block";
   gameScreen.style.display = "none";
   startScreen.style.display = "none";
@@ -189,9 +187,9 @@ homeBtn.addEventListener("click", goHome);
 //input name
 nameInput.addEventListener("keydown", (event) => {
   if (event.code === "Enter") {
-    startBtn.click()
+    startBtn.click();
   }
-})
+});
 
 //loading
 window.addEventListener("load", () => {
@@ -199,7 +197,7 @@ window.addEventListener("load", () => {
   startBtn.style.display = "block";
   nameInput.style.display = "block";
   loadingSpan.style.display = "none";
-  goHome()
+  goHome();
 });
 
 //click disparo

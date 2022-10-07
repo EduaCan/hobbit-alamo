@@ -101,7 +101,7 @@ class Torre {
         20,
         15
       );
-    } 
+    }
   };
 
   //movimiento arriba

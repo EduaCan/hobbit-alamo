@@ -6,7 +6,7 @@ class Game {
     this.torre = new Torre();
     //enemigos
     this.enemyArray = [];
-    this.cadaverArray = []; 
+    this.cadaverArray = [];
     //fondo
     this.fondo = new Image();
     this.fondo.src = "./images/background.png";
@@ -25,24 +25,23 @@ class Game {
     this.powerUpArray = [];
     //sonidos
     this.losingAudio = new Audio("./sounds/mixkit-trombone-disappoint-744.wav");
-    this.losingAudio.volume = 0.01
+    this.losingAudio.volume = 0.01;
     this.shootAudio = new Audio(
       "./sounds/mixkit-funny-squeaky-toy-hits-2813.wav"
     );
-    this.shootAudio.volume = 0.01
+    this.shootAudio.volume = 0.01;
     this.orcLaught = new Audio(
       "./sounds/mixkit-creepy-little-creature-2873.mp3"
     );
-    this.orcLaught.volume = 0.01
+    this.orcLaught.volume = 0.01;
     this.orcDeath = new Audio("./sounds/mixkit-cartoon-fart-or-splat-3056.mp3");
-    this.orcDeath.volume = 0.01
+    this.orcDeath.volume = 0.01;
 
     this.getPowerUp = new Audio("./sounds/mixkit-drum-joke-accent-579.wav");
-    this.getPowerUp.volume = 0.01
+    this.getPowerUp.volume = 0.01;
 
     this.getShitSound = new Audio("./sounds/mixkit-hard-pop-click-2364.wav");
-    this.getShitSound.volume = 0.01
-
+    this.getShitSound.volume = 0.01;
   }
 
   //todos los metodos y acciones del juego
@@ -75,9 +74,9 @@ class Game {
         this.enemyArray.splice(deadEnemy, 1);
         this.lifes--;
         this.heartArray.pop();
-        let orcLaughtClone = this.orcLaught.cloneNode(true)
-        orcLaughtClone.volume = 0.01
-        orcLaughtClone.play()
+        let orcLaughtClone = this.orcLaught.cloneNode(true);
+        orcLaughtClone.volume = 0.01;
+        orcLaughtClone.play();
         if (this.lifes === 0) {
           this.gameOver();
         }
@@ -89,17 +88,17 @@ class Game {
   colisionCadaverTorre = () => {
     this.cadaverArray.forEach((eachCadaver) => {
       if (
-        eachCadaver.x < this.torre.x + this.torre.w && 
+        eachCadaver.x < this.torre.x + this.torre.w &&
         eachCadaver.x + eachCadaver.w > this.torre.x &&
         eachCadaver.y < this.torre.y + this.torre.h &&
         eachCadaver.h + eachCadaver.y > this.torre.y
       ) {
         let stepShit = this.cadaverArray.indexOf(eachCadaver);
         this.cadaverArray.splice(stepShit, 1);
-        let getShitSoundClone = this.getShitSound.cloneNode(true)
-        getShitSoundClone.volume = 0.01
-        getShitSoundClone.play()
-        
+        let getShitSoundClone = this.getShitSound.cloneNode(true);
+        getShitSoundClone.volume = 0.01;
+        getShitSoundClone.play();
+
         this.getScore(!eachCadaver.isCadaver);
       }
     });
@@ -115,9 +114,9 @@ class Game {
     );
     this.disparoArray.push(nuevoDisparo);
     if (canvas.style.display === "block") {
-      let shootAudioClone = this.shootAudio.cloneNode(true)
-      shootAudioClone.volume = 0.01
-      shootAudioClone.play()
+      let shootAudioClone = this.shootAudio.cloneNode(true);
+      shootAudioClone.volume = 0.01;
+      shootAudioClone.play();
     }
   };
 
@@ -134,7 +133,8 @@ class Game {
         ) {
           let deadEnemy = this.enemyArray.indexOf(eachEnemy);
           let deadDisaparo = this.disparoArray.indexOf(eachDisparo);
-          if (Math.floor(Math.random() * (5 + this.level)) === 0) { //power ups random con la muerte de enemigo
+          if (Math.floor(Math.random() * (5 + this.level)) === 0) {
+            //power ups random con la muerte de enemigo
             let newPowerUp = new PowerUp(
               this.enemyArray[deadEnemy].x,
               this.enemyArray[deadEnemy].y,
@@ -148,9 +148,9 @@ class Game {
           this.disparoArray.splice(deadDisaparo, 1);
           this.getScore(true);
           this.getLevel();
-          let orcDeathClone = this.orcDeath.cloneNode(true)
-          orcDeathClone.volume = 0.01
-          orcDeathClone.play()
+          let orcDeathClone = this.orcDeath.cloneNode(true);
+          orcDeathClone.volume = 0.01;
+          orcDeathClone.play();
         }
       });
     });
@@ -171,9 +171,9 @@ class Game {
           this.powerUpArray.splice(deadPowerUp, 1);
           this.disparoArray.splice(deadDisparo, 1);
           this.getALife();
-          let getPowerUpClone = this.getPowerUp.cloneNode(true)
-          getPowerUpClone.volume = 0.01
-          getPowerUpClone.play()
+          let getPowerUpClone = this.getPowerUp.cloneNode(true);
+          getPowerUpClone.volume = 0.01;
+          getPowerUpClone.play();
         }
       });
     });
@@ -248,7 +248,7 @@ class Game {
     this.colisionDisparoEnemy();
     this.colisionEnemyTorre();
     this.colisionDisparoPowerUp();
-    this.colisionCadaverTorre()
+    this.colisionCadaverTorre();
     this.torre.moveTorre();
 
     //3 dibujado de los elementos
