@@ -10,10 +10,10 @@ Una torre situada en el centro inferior del mapa va disparando a enemigos que se
 
 # Main Functionalities
 
-- Enemigos aparecen en el borde del canvas y se acercan a la torre.
+- Enemigos aparecen en el borde superior del canvas y se acercan a la torre.
 - Disparos de la torre dirigidos con el puntero del ratón.
 - Muerte de los enemigos tras impacto de los disparos y de la torre al entrar en contacto con los enemigos.
-- Fin del juego al ser la torre destruida, al perder las 3 vidas.
+- Fin del juego al ser la torre destruida, al perder todas las vidas.
 - Con la muerte de los enemigos van apareciendo power ups y bonus.
 - Ranking con las mejores partidas jugadas.
 
@@ -183,4 +183,4 @@ powerUp(placeX, placeY, frames) {
 [Link](https://trello.com/b/gyDYAELw/hobbit-alamo)
 
 ### Slides
-[Link](www.your-url-here.com)
+[Link](https://docs.google.com/presentation/d/1ARImEo6-WLeVg2YqTrLURNDvaW_wnkBnLkaauH5BKws/edit?usp=sharing)
